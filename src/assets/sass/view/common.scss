@@ -1,0 +1,25 @@
+.product-icon{
+    @include size(16px);
+    margin-right: 4px;
+}
+
+// 银行logo 带边框 兼容旧版，以上暂不删除
+.icon-bank{
+    border-radius: 4px;
+    overflow: hidden;
+    @include onePxBorder($borderColor);
+}
+
+// 资方logo icon 带边框
+.c-financing-logo {
+    border-radius: 4px;
+    margin-right: 4px;
+    overflow: hidden;
+    @include size(18px);
+    @include onePxBorder($borderColor);
+    @include center-flex;
+
+    img {
+        @include size(16px);
+    }
+}

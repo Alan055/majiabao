@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>ag_eu</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FF484A" offset="0%"></stop>
+            <stop stop-color="#FE7778" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#F8D0D6" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="100%" x2="50%" y2="0%" id="linearGradient-3">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#F8D0D6" offset="100%"></stop>
+        </linearGradient>
+        <path d="M19.530172,26.8025054 L18.140629,25.2668929 C18.0284466,25.1450549 17.9799002,24.9849805 18.0076456,24.828117 L19,21 L19.9894481,21 L20.0014873,21 L21,21 L21.9952966,24.8390754 C22.0159677,24.9887806 21.9679406,25.1395168 21.8623132,25.255964 L20.4606012,26.8025054 C20.3443624,26.9294101 20.171205,27.0019061 19.9894481,26.9999619 C19.8118449,26.9986952 19.6438796,26.9264349 19.530172,26.8025054 Z" id="path-4"></path>
+        <filter x="-175.0%" y="-83.3%" width="450.0%" height="333.3%" filterUnits="objectBoundingBox" id="filter-5">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 1   0 0 0 0 0.37254902   0 0 0 0 0.376470588  0 0 0 0.220618207 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标编码" transform="translate(-516.000000, -909.000000)">
+            <g id="Repeat-Group" transform="translate(-1.000000, 537.000000)"></g>
+            <g id="Repeat-Group-Copy" transform="translate(1750.000000, 2288.000000) rotate(90.000000) translate(-1750.000000, -2288.000000) translate(-1.000000, 537.000000)"></g>
+            <g id="icon/40pt图14pt文/40*40icon/账户问题" transform="translate(516.000000, 909.000000)">
+                <circle id="Oval-3" fill="url(#linearGradient-1)" fill-rule="evenodd" cx="20" cy="20" r="20"></circle>
+                <path d="M20.1082846,10.001181 C18.0768404,9.95716265 16.2207969,11.1469534 15.4126249,13.0112681 C14.6044529,14.8755829 15.0049079,17.0435859 16.425748,18.4961638 C17.8465881,19.9487417 20.0051902,20.3969583 21.88686,19.6301205 C23.7685299,18.8632826 24.9989795,17.033924 24.9998113,15.0019714 C25.0233754,12.2729106 22.8371582,10.0378592 20.1082846,10.001181 Z" id="_1.svg" fill="url(#linearGradient-2)" fill-rule="evenodd"></path>
+                <path d="M17.6315789,21 C13.8856842,21 11,24.5741627 11,28.1483254 L11,28.55311 C11,30 14.0159474,30 17.8106316,30 L22.1893684,30 C25.9347895,30 29,29.9569378 29,28.55311 L29,28.1483254 C29,24.5741627 26.1143158,21 22.3684211,21 L21.8947368,21 L17.6315789,21 Z" id="_1.svg-path" fill="url(#linearGradient-3)" fill-rule="evenodd"></path>
+                <g id="Fill-1">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-5)" xlink:href="#path-4"></use>
+                    <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-4"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

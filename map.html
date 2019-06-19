@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+  <script type="text/javascript">
+
+
+      let value='发发发地方大幅度发发发发'
+
+      if(value.length>6){
+
+        var a=  value.substring(0,3)+'...'
+          console.log(a);
+      }
+
+      var item={
+          city:'发发发地方大幅度发发发发'
+      }
+
+      item.city=(item.city.length>6) ?   item.city.substring(0,3)+'...' : item.city
+
+      //if (/^[a-zA-Z]+$/.test(value)) {
+
+      //if (/^[0-9]+$/.test(value)) {
+
+      if(/^[\u4E00-\u9FA5]+$/.test(value)){
+          console.log('ok');
+      }else{
+
+      }
+  </script>
+  </body>
+</html>

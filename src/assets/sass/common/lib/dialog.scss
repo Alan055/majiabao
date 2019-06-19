@@ -1,0 +1,44 @@
+.c-dialog{
+  background: white;
+  border-radius: 8px;
+  width: 270px;
+  min-height: 200px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  .header{
+    padding: 20px $gap;
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    .title{
+      font-size: 16px;
+      line-height: 22px;
+      color: #659FFC;
+      text-align: center;
+    }
+    .close{
+      position: absolute;
+      top: 8px;
+      right: 8px;
+    }
+  }
+  .content{
+    padding: 0 $gap;
+    flex: 1;
+  }
+  .footer{
+    padding: 11px $gap;
+    text-align: center;
+    font-size: 16px;
+  }
+}
+
+.c-confirm{
+  .footer{
+    @extend %border-t;
+  }
+}

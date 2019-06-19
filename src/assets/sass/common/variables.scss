@@ -1,0 +1,59 @@
+@charset "UTF-8";
+//-----------------------------------------------------
+// setting scss
+//-----------------------------------------------------
+
+//----------------------font---------------------------
+$baseFont: "Helvetica Neue",
+Helvetica,
+STHeiTi,
+Arial,
+sans-serif !default;
+
+// 字号
+$baseSize: 14px !default;
+
+$fontXS: 10px !default;
+$fontS: 12px !default;
+$fontM: 14px !default;
+$fontL: 16px !default;
+$fontXL: 18px !default;
+$fontXXL: 20px !default;
+
+// 行高
+$lineHeight: 1.4 !default;
+
+
+
+//----------------------color------------------------
+$black: black !default;
+$dark: #262626 !default;
+
+$gray: #666 !default;
+$btngray: #ccc !default;
+$light: #999 !default;
+$lighter: #c2c2c2 !default;
+$white: white !default;
+
+$red: #E72427 !default;
+$green: #41BD99 !default;
+$blue: #659FFC !default;
+$orange: #FF8000 !default;
+
+$primary: #E72427 !default;
+$textColor: #333 !default;
+$borderColor: #e6e6e6 !default;
+
+$background: white !default;
+$bggray: #F4F4F4 !default;
+
+
+//---------------------间距--------------------------
+// 页面边距
+$gap: 16px !default;
+
+
+//---------------------高度预设-------------------------
+$phoneTop: 20px !default;      //iphone头部状态栏
+$headerHeight: 44px !default;  //header
+$navHeight: 100px !default;    //nav

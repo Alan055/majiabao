@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta charset="utf-8">
+    <!-- 是否启用 WebApp 全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- 添加到主屏后的标题（iOS 6 新增） -->
+    <meta name="apple-mobile-web-app-title" content="">
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- <meta name="flexible" content="initial-dpr=1" /> -->
+    <!-- <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.3&key=bf5a60185de95011c9e76d24330a0dc7"></script> -->
+    <!-- <link rel="shortcut icon" href="/static/favicon.ico"> -->
+    <!-- <script src="https://cdn.staticfile.org/babel-polyfill/6.16.0/polyfill.min.js"></script> -->
+    <title>大王贷款</title>
+    <!-- <script src="/static/lib/flexible/flexible_css.js"></script>
+    <script src="/static/lib/flexible/flexible.js"></script> -->
+
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <!-- built files will be auto injected -->
+    <script type="text/javascript" src="vue.min.js"></script>
+    <script type="text/javascript">
+    function load(componentName, path) {
+      return new Promise(function(resolve, reject) {
+        var script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.src = path;
+        script.async = true;
+        script.onload = function() {
+          var component = Vue.component(componentName);
+          if (component) {
+            resolve(component);
+          } else {
+            reject();
+          }
+        };
+        script.onerror = reject;
+        document.body.appendChild(script);
+      });
+    }
+    load('test', 'test.js').then()
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <meta charset="utf-8">
+    <!-- 是否启用 WebApp 全屏模式 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!-- 添加到主屏后的标题（iOS 6 新增） -->
+    <meta name="apple-mobile-web-app-title" content="">
+    <!-- 忽略页面中的数字识别为电话，忽略email识别 -->
+    <meta name="format-detection" content="telephone=no, email=no">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,
+            minimum-scale=1.0,
+            maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <script type="text/javascript" src="<%=
+            htmlWebpackPlugin.options.resourceUrl %>static/lib/compatibility/objectAssign.js"></script>
+    <script type="text/javascript" src="<%=
+            htmlWebpackPlugin.options.resourceUrl %>static/lib/es6-shim/es6-sham.min.js"></script>
+    <script type="text/javascript" src="<%=
+            htmlWebpackPlugin.options.resourceUrl %>static/lib/es6-shim/es6-shim.js"></script>
+    <link rel="shortcut icon" href="./favicon.ico">
+    <script>
+        // Date 对象
+        window.visitTime = new Date();
+    </script>
+    <!-- GrowingIO Analytics code version 2.1 -->
+    <!-- Copyright 2015-2018 GrowingIO, Inc. More info available at http://www.growingio.com -->
+    <script type='text/javascript'>
+        var isProd = '<%= htmlWebpackPlugin.options.env%>'
+
+        if (isProd == 'prod') {
+            ! function(e, t, n, g, i) {
+                e[i] = e[i] || function() {
+                    (e[i].q = e[i].q || []).push(arguments)
+                }, n = t.createElement("script"), tag = t.getElementsByTagName("script")[0], n.async = 1, n.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + g, tag.parentNode.insertBefore(n, tag)
+            }(window, document, "script", "assets.growingio.com/2.1/gio.js", "gio");
+            gio('init', 'be0bf9e8f4f1b9d4', {});
+
+            //custom page code begin here
+
+            //custom page code end here
+
+            gio('send');
+        }
+    </script>
+    <!-- End GrowingIO Analytics code version: 2.1 -->
+
+    <title></title>
+</head>
+
+<!-- <script src="/static/lib/flexible/flexible_css.js"></script>
+<script src="/static/lib/flexible/flexible.js"></script> -->
+<script type="text/javascript" src="<%=htmlWebpackPlugin.options.resourceUrl %>static/lib/vw-fix/vw-fix.js"></script>
+
+<body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <script>
+        // vw fix
+        window.onload = function() {
+            window.viewportUnitsBuggyfill.init({
+                hacks: window.viewportUnitsBuggyfillHacks
+            });
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,61 @@
+
+// 视图容器 垂直布局
+.c-view{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+// 块级容器
+.c-view-block{
+  flex: 1;
+}
+// 滚动容器
+.c-view-content{
+  position: relative;
+  top: 0;
+  left: 0;
+  flex: 1;
+  width: 100%;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: hidden;
+  overflow-y: auto;
+  transform: translateX(0);
+  z-index: 0;
+}
+
+//覆盖层
+.c-view-fixed-cover {
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .5);
+}
+
+// 垂直居中
+.c-view-fixed-center {
+  @include center-flex();
+}
+
+// 固定顶部、底部
+.c-view-fixed-top {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+.c-view-fixed-bottom {
+  position: absolute;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

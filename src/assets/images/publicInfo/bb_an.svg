@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>bb_an </title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M2.93105344,14.2213375 C1.61100003,11.683482 0.63398222,10.2774162 0,10.0031399 C4.4408921e-16,9.87281177 8.8817842e-16,9.53916931 8.8817842e-16,9.00221252 C0.655063256,8.83925755 1.63669366,7.75488824 2.9448912,5.74910461 C4.54213747,2.35184856 7.99451058,0 11.9960044,0 C12.0336502,0 12.0712473,0.000208159777 12.1087948,0.000623391476 C16.0657093,0.0411998606 19.4718257,2.38154755 21.0551088,5.74910461 C22.3633063,7.75488824 23.3449367,8.83925755 24,9.00221252 C24,9.53916931 24,9.87281177 24,10.0031399 C23.3660178,10.2774162 22.389,11.683482 21.0689466,14.2213375 C19.4917342,17.6047504 16.0772759,19.9586813 12.1088126,19.9994617 C12.0712473,19.9997918 12.0336502,20 11.9960044,20 C7.98291587,20 4.52213493,17.6345023 2.93105344,14.2213375 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标编码" transform="translate(-164.000000, -2218.000000)">
+            <g id="Repeat-Group" transform="translate(-1.000000, 537.000000)"></g>
+            <g id="Repeat-Group-Copy" transform="translate(1750.000000, 2288.000000) rotate(90.000000) translate(-1750.000000, -2288.000000) translate(-1.000000, 537.000000)"></g>
+            <g id="外围组件/顶部步骤/中间" transform="translate(164.000000, 2218.000000)">
+                <g id="外围组件/颜色/90灰" stroke-width="1" fill-rule="evenodd" transform="translate(0.000000, 2.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#E6E6E6" xlink:href="#path-1"></use>
+                    <g mask="url(#mask-2)" fill="#E6E6E6" id="Rectangle-15">
+                        <g transform="translate(-147.000000, -308.000000)">
+                            <rect x="0" y="0" width="375" height="667"></rect>
+                        </g>
+                    </g>
+                </g>
+                <text id="2" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" letter-spacing="-0.3075" fill="#FFFFFF">
+                    <tspan x="9" y="16">2</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

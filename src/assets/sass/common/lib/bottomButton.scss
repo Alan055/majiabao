@@ -1,0 +1,45 @@
+
+// 底部button
+.c-bottom-button{
+  @extend .c-flex-row;
+  background: #fcfcfc;
+  box-shadow: 0 -1px 0 0 #F0F0F0;
+  position: relative;
+  z-index: 1;
+
+  dt,dd{
+    height: 50px;
+  }
+  dt{
+    background: white;
+    font-size: 10px;
+    color: $light;
+    width: 66px;
+    padding: 8px;
+  }
+  dd{
+    background: $primary;
+    color: white;
+    font-size: 16px;
+    line-height: 50px;
+
+    &.light{
+      background: #49D6D6;
+    }
+  }
+  
+  //
+  // padding: 10px 20px;
+  // dd{
+  //   margin: 0 20px;
+  // }
+  // .btn-block{
+  //   height: 90px;
+  //   line-height: 50px;
+  //   padding: 20px;
+  //   font-size: 34px;
+  //   &.btn-default.btn-reverse{
+  //     color: #4A4A4A;
+  //   }
+  // }
+}
