@@ -52,8 +52,8 @@ module.exports = {
 
     // Paths
     assetsRoot: path.resolve(__dirname, "../dist" + rootPath),
-    assetsSubDirectory: "static",
-    assetsPublicPath: "/",
+    assetsSubDirectory: "static", // 打包时 除了入口文件之外的其他文件放在哪个目录下
+    assetsPublicPath: "/", // 打包时 html引入其他文件的前缀  如何域名后面有文件夹  就要用./ 可以叠加  / 是只取域名这一截
 
     /**
      * Source Maps

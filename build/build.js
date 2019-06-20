@@ -4,7 +4,7 @@ require('./check-versions')()
 process.env.NODE_ENV = 'production'
 
 const ora = require('ora')
-const rm = require('rimraf')
+const rm = require('rimraf') // 删除一些文件
 const path = require('path')
 const chalk = require('chalk')
 const webpack = require('webpack')
@@ -19,22 +19,24 @@ if(open) {
 const spinner = ora('building for production...')
 spinner.start()
 
+// 需要删除文件和文件夹 因为这个是多入口的项目
 let filesToRemove = function() {
   let paths = []
   if(open) {
     paths.push(open)
-  }
-  else {
+  } else {
     paths.push(config.build.assetsSubDirectory)
     paths.push('pages')
     paths.push('map')
   }
+
   paths = paths.map(item => path.join(config.build.assetsRoot, item))
   return paths.length > 1 ? `{${paths.join()}}` : paths[0]
 }()
 
 rm(filesToRemove, err => {
   if (err) throw err
+
   webpack(webpackConfig, (err, stats) => {
     spinner.stop()
     if (err) throw err
