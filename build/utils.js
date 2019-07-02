@@ -8,9 +8,7 @@ const merge = require('webpack-merge') // 合并对象的插件
 const HtmlWebpackPlugin = require('html-webpack-plugin') // html中将css文件加上hash值  保证每次打包的css都不一样  这样用户就不需要清楚缓存来清空css了
 const argv = require('yargs').argv
 let open = argv.open  //open 指定打包
-if(open) {
-  open = open.replace(/^\//, '').replace(/\/$/, '')
-}
+open && (open = open.replace(/^\//, '').replace(/\/$/, '')) // 如果存在就去掉两边的斜杠
 
 const cliParams = require('./cliParams')
 const theme = JSON.parse(cliParams.theme)
