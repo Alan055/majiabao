@@ -1,4 +1,7 @@
 <template>
+    <div class="view">
+
+
   <div class="c-view-content" v-if="data.length">
     <div class="list-wrap">
       <div class="list-center">
@@ -52,6 +55,7 @@
     text="当前无待还账单"
     v-else-if="isFinsh && !data.length"
   ></no-data>
+    </div>
 </template>
 
 <script>

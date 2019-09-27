@@ -68,11 +68,11 @@ function generator(type) {
     /*webRequest(data, callback);
     return*/
 
-    if (AppBridge.isApp) {
-      callApp(data, callback);
-    } else {
+    //if (AppBridge.isApp) {
+      //callApp(data, callback);
+    //} else {
       webRequest(data, callback);
-    }
+    //}
   };
 }
 
@@ -198,12 +198,21 @@ function webRequest(option, callback) {
       }
     ]
   };
-  // 断网处理
-  axios(setting)
-    .then(res => {
-      if (callback) callback(res);
-    })
-    .catch(e => {});
+    // 断网处理
+    try {
+        axios(setting)
+            .then(res => {
+                //  if (callback) callback(res);
+            })
+            .catch(e => {
+            });
+
+        if (callback) callback();
+    } catch (e) {
+
+        console.error('埋点异常===========>', e);
+        if (callback) callback();
+    }
 }
 
 // 返回一个YYYY-mm-dd时间
@@ -271,6 +280,7 @@ let fnList = [
   "click", // 点击事件
   "hover", // input聚焦
   "popover", // 弹框显示隐藏
+  "display", // 功能型曝光
   "tips" // Toast
 ];
 let Api = {};

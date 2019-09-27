@@ -4,11 +4,20 @@
             <div class="pull-down-bg" :style='{height: activeHeight}'></div>
         </div>
 
-        <c-header ref="transparentHeader" class="header transparent" :style="`color: rgba(0, 0, 0, ${headerRgba}); background: rgba(255, 255, 255, ${headerRgba}); opacity: ${headerOpacity}`" :title="appName2" :show="true">
+        <c-header ref="transparentHeader" class="header header-content " :title="appName2" :show="true"
+                  :style="`color: rgba(0, 0, 0, ${headerRgba}); background: rgba(255, 255, 255, ${headerRgba}); opacity: ${headerOpacity}`" >
+            <span slot="left" class="posi-l" >
+                <c-icon type="back" @click.native="handleBack"/>
+            </span>
             <span slot="right" class="posi-r">
+               <div class=" he-inline-block redEnvelope" v-if="homeData.welfareInfo.entranceData&&homeData.welfareInfo.entranceData.topEntrance"
+                     @click="clickMD(homeData.welfareInfo.entranceData.topEntrance.url)">
+                        <img :src="homeData.welfareInfo.entranceData.topEntrance.gif" alt="">
+                    </div>
                 <div class="he-inline-block" v-sina-ads='stat.recommend.online.kefu' @click="$root.openUrl(onlineServiceURL);redIcon=false;" >
                     <img class="c-icon icon_a" src="../../assets/images/kefu@2x.png"/>
                 </div>
+
                 <div class="he-inline-block" v-sina-ads='stat.recommend.message.mess' @click="$root.openUrl(messageUrl);redIcon=false;" >
                     <img class="c-icon icon_a" src="../../assets/images/message@2x.png"/>
                     <span v-if="redIconShow" :class="['red-icon', ['red-icon-one', 'red-icon-two', 'red-icon-three'][redIconCount.length - 1]]">{{redIconCount}}</span>
@@ -29,16 +38,14 @@
             <!-- <div id="blockHeaderContent" class="block-header" ref="transparentBlock"></div> -->
 
             <!-- 还款区域 -->
-            <div style="border: 1px solid #F5F6FA; border-left: none;border-right: none;">
-                <div  class="section repay-content" v-if="homeData.apiFinish && homeData.repayProducts.length > 0" @click="handleRepayClick">
-                    <div class="c-flex-row">
-                        <div class="c-col-75">
-                            您有<em>{{homeData.repayProducts.length}}</em>笔待还账单
-                        </div>
-                        <div class="c-col-25">
-                            <em v-show="isShowRepayRed"></em>
-                            立即还款
-                        </div>
+            <div class="section repay-content" v-if="homeData.apiFinish && homeData.repayProducts.length > 0" @click="handleRepayClick">
+                <div class="c-flex-row">
+                    <div class="c-col-75">
+                        您有<em>{{homeData.repayProducts.length}}</em>笔待还账单<span v-if="homeData.repayDate">最近还款日{{homeData.repayDate}}</span>
+                    </div>
+                    <div class="c-col-25">
+                        <em v-show="isShowRepayRed"></em>
+                        立即还款
                     </div>
                 </div>
             </div>
@@ -49,15 +56,16 @@
             <multi-apply id="multiApplyContent" class="section" :resdata="homeData" v-if="homeData"/>
 
             <!-- 安卓版显示贷超 -->
-            <credit-card class="section iframe-section" :style="`height: ${creditCardHeight};`" v-if="iframeUrl && browser.android" :iframeUrl="iframeUrl" />
+            <credit-card class="section iframe-section" :style="`height: ${creditCardHeight};`" v-if="iframeUrl && browser.android && isShowIframeUrl == 1" :iframeUrl="iframeUrl" id="iframeSection"/>
 
             <!-- 三级商户 -->
-            <offline-product class="section" :resdata="homeData"/>
+            <offline-product class="section" :resdata="homeData" id="offlineProduct"/>
 
             <!-- 征信查询  -->
             <div class="section credit-content" v-if="zhengxinURL" @click="$root.openUrl({url: zhengxinURL, title: '征信查询'})"></div>
             <watermark ref="watermark"/>
         </scroller>
+      <dialog_redEnvelope class="redbox" :close="closeRedBagDialog" :showDialog.sync="showRedEnvelope" :res="homeData.welfareInfo"></dialog_redEnvelope>
     </div>
 </template>
 
@@ -79,6 +87,9 @@ import EventBus from "@/services/EventBus";
 import { Toast, Indicator } from "@/utils/helper";
 import MaxentSDK from "@/services/MaxentSDK";
 import watermark from "../../components/watermark";
+import dialog_redEnvelope from "@/components/business/dialog_redEnvelope.vue";
+
+
 export default {
   data() {
     return {
@@ -93,14 +104,16 @@ export default {
       headerRgba: 1,
       activeHeight: "30vh",
       isShowRepayRed: false,
+      isShowIframeUrl: util.getParams("isShowIframeUrl") || 0,
       browser: util.browser.versions,
       homeData: {
         apiFinish: false,
+        repayDate: "", //最近还款日
         applyproducts: [],
         withdrawProducts: [],
         repayProducts: [],
         otherProducts: [],
-        welfareInfo: [],
+        welfareInfo: {},
         newcards: "",
         onekeyapplypage: {
           url: ""
@@ -112,7 +125,8 @@ export default {
         resecondproducts: []
       }, //首页数据汇总
       iframeUrl: "", //商业化地址
-      creditCardHeight: "0" //商业地址高度
+      creditCardHeight: "0", //商业地址高度
+      showRedEnvelope: false, // 是否展示红包的窗口
     };
   },
   mixins: [require("../../mixins").default],
@@ -126,7 +140,8 @@ export default {
     creditCard,
     secondRemittance,
     scroller,
-    watermark
+    watermark,
+    dialog_redEnvelope,
   },
   methods: {
     init(tag) {
@@ -152,6 +167,10 @@ export default {
       this.homeData = this.$options.data().homeData;
       console.log("重置了数据", this.homeData);
     },
+    // 关闭红包弹框
+    closeRedBagDialog(){
+      this.showRedEnvelope = false
+    },
     //关闭loading
     loadingClose() {
       this.$nextTick(() => {
@@ -162,7 +181,7 @@ export default {
     //刷新
     refresh(cb) {
       //this.initHomeData();
-      this.headerOpacity = 0;
+      //this.headerOpacity = 0;
       this.init();
       setTimeout(() => {
         this.headerOpacity = 1;
@@ -172,15 +191,15 @@ export default {
     //top 距离顶部的像素点
     onPulling(top) {
       if (top && top > 20) {
-        this.headerOpacity = 0;
+        //this.headerOpacity = 0;
       }
     },
     //滚动中
     onScroll(e) {
       let scrollTop = e.target.scrollTop;
-      return;
+
       if (scrollTop <= 100) {
-        this.headerRgba = scrollTop / 100;
+        //this.headerRgba = scrollTop / 100;
       } else {
         this.headerRgba = 1;
         this.headerOpacity = 1; //解决正在刷新时又上滑透明度不还原问题
@@ -192,6 +211,13 @@ export default {
         this.headerOpacity = 1;
       }, 200);
     },
+    handleBack() {
+      this.$AppBridge.activityView({
+        type: "close"
+      });
+    },
+
+    //还款列表点击
     handleRepayClick() {
       helper.set("isShowRepayRed", 1);
       this.isShowRepayRed = false;
@@ -289,7 +315,10 @@ export default {
           .then(res => {
             if (res.code == 200 && res.data) {
               this.iframeUrl = res.data.jumplink;
-
+              //this.marketUserStatsus = 3;
+              if(res.data.marketUserStatsus) {
+                this.marketUserStatsus = res.data.marketUserStatsus;
+              }
               setTimeout(() => {
                 this.loadingClose();
               }, 3000);
@@ -363,49 +392,67 @@ export default {
     formatData(data) {
       let withdrawProducts = [];
       let repayProducts = [];
+      let repayDate = []; //有还款日期
       let otherProducts = [];
       if (data.applyproducts) {
-        let repayArray = [16, 17, 18, 19, 20, 21, 22, 25, 26, 27, 31];
-        data.applyproducts.forEach(item => {
-          /*
-                            if(item.status == 10) {
-                                withdrawProducts.push(item)
-                            }else if(repayArray.includes(item.status)){
-                                repayProducts.push(item);
-                            }else {
-                                otherProducts.push(Object.assign({isOneProduct: true}, item));
-                            }*/
-          if (repayArray.includes(item.status)) {
-            repayProducts.push(item);
-          } else {
-            withdrawProducts.push(Object.assign({ isOneProduct: true }, item));
+          let repayArray = [16, 17, 18, 19, 20, 21, 22, 25, 26, 27, 31]; // 这里不是日期  是状态码 具体是什么不清楚
+          for (let item of data.applyproducts) {
+              if (repayArray.includes(item.status)) {
+                  repayProducts.push(item);
+                  // 这里千万注意  item有时候是没有数据的  测试环境传的是字符串时间戳(moment().valueOf()对字符串时间戳是NaN) 生产环境传的是字符串的时间格式  所以判断的时候要特别注意
+                  if (item.deadline) {
+                      // 处理的做法是 统一处理成时间戳  推入数组  要先判断一下是不是无效的时间("Invalid Date")
+                      let time = moment(isNaN(Number(item.deadline)) ? item.deadline : Number(item.deadline)).valueOf() // 如果传入的参数不是时间格式 得到的结果就是NaN
+                      !isNaN(time) && repayDate.push(time) // 当不是NaN的时候才传入到数组里面
+                  }
+              } else {
+                  withdrawProducts.push(Object.assign({isOneProduct: true}, item));
+              }
           }
-        });
+
+          if (repayDate.length > 0) {
+              repayDate.sort((a, b) => a - b); // 正序 这里应该是最近还款日  所以应该是最小的  下面取0
+              this.homeData.repayDate = moment(Number(repayDate[0])).format("MM月DD日")
+          }
+
         this.homeData.withdrawProducts = withdrawProducts;
         this.homeData.repayProducts = repayProducts;
         helper.set(
           "homeData-repayProducts",
           JSON.stringify(this.homeData.repayProducts)
         );
-        console.log("this.homeData.repayProducts", this.homeData.repayProducts);
       }
       if (data.resecondproducts && data.resecondproducts.length > 0) {
         otherProducts = otherProducts.concat(data.resecondproducts);
       }
       this.homeData.otherProducts = otherProducts;
+
+      console.log("this.homeData", this.homeData);
+    },
+    // 点击右上角的红包固定入口时添加埋点
+    clickMD(url){
+      this.sinaAds.click({currEvent: this.stat.redEnvelope.index.clickFiexd,currEventParams:{url:url}}, () => {});
+      this.$root.openUrl(url)
     },
     queryHomePageWelfareInfo() {
       api.home
         .queryHomePageWelfareInfo({
-          type: "list",
-          token: util.getParams("token") || storage.get("token") || ""
+          productId: 2001,
+          token: util.getParams("token") || storage.get("token") || "",
         })
         .then(res => {
           if (helper.isSuccess(res)) {
             if (res.data) {
               this.homeData = Object.assign({}, this.homeData, {
-                welfareInfo: res.data.realData
+                welfareInfo: res.data
               });
+              if(res.data.dialogRelData && res.data.dialogRelData.length){ // 有数据的时候就打开弹框
+                this.showRedEnvelope = true
+              }
+              // 添加埋点
+              if (this.homeData.welfareInfo.entranceData) {
+                this.sinaAds.display({currEvent: this.stat.redEnvelope.index.showFiexd,}, () => {});
+              }
             }
           }
         });
@@ -470,6 +517,10 @@ export default {
     }
   },
   created() {
+    this.$root.setWebAttribute({
+      title: this.appName2,
+      isFull: true,
+    });
     helper.get("isShowRepayRed").then(value => {
       if (value != 1) {
         this.isShowRepayRed = true;
@@ -486,7 +537,7 @@ export default {
     EventBus.$off("postMessage");
   },
   mounted() {
-    this.$root.setStatusColor("white");
+    this.$root.setStatusColor("black");
 
     this.$nextTick(() => {
       this.loadingClose();
@@ -510,6 +561,9 @@ export default {
     -webkit-transform: rotateZ(360deg);
   }
 }
+.header {
+  @extend %border-b;
+}
 .view {
   transform: translateX(0);
 
@@ -527,11 +581,15 @@ export default {
   }
 
   .header-content {
+    width: 100%;
     display: flex;
     align-items: center;
     text-align: left;
-    padding-left: 16px;
-    margin-bottom: 10px;
+    padding-top: 30px;
+    /deep/ .mint-header{
+      width: 100%;
+      border: none;
+    }
     .center {
       display: flex;
       align-items: center;
@@ -555,6 +613,12 @@ export default {
       position: absolute;
       right: 0;
       margin-right: 16px;
+    }
+    .redEnvelope {
+      right: 30px;
+      img {
+        width: 24px;
+      }
     }
   }
 }
@@ -618,13 +682,7 @@ export default {
 }
 
 .header {
-  position: relative;
-  z-index: 1;
-  // transition: background .3s;
-  &.show {
-    background: #514353 !important;
-    color: white !important;
-  }
+
 }
 .block-header {
   display: block;
@@ -712,11 +770,12 @@ export default {
 }
 
 /deep/ .mint-header-title {
+
   margin-left: 26px;
 }
 .posi-r {
   position: relative;
-
+  display: flex;
   .he-inline-block {
     margin-left: 10px;
   }

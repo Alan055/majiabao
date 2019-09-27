@@ -1,12 +1,9 @@
-
 // 根据使用习惯，对normalize进行补充
 //-----------------------------------------------------
-
 html {
     font-family: $baseFont; // 0
     -ms-text-size-adjust: 100%; // 1
     -webkit-text-size-adjust: 100%; // 1
-
     font-size: $fontM;
     margin: 0 auto;
     min-height: 100%;
@@ -17,12 +14,12 @@ html {
 
 body {
     -webkit-overflow-scrolling: touch; // 滚动更流畅
-    -webkit-user-select:none;   //禁止文字选中
-    -webkit-touch-callout:none; //系统默认菜单被禁用
-    -webkit-tap-highlight-color: transparent;   //去掉点击闪动
+    -webkit-user-select: none; //禁止文字选中
+    -webkit-touch-callout: none; //系统默认菜单被禁用
+    -webkit-tap-highlight-color: transparent; //去掉点击闪动
     -ms-touch-action: manipulation; //ie10去掉点击触发延迟
     touch-action: manipulation; //ie11去掉点击触发延迟
-    word-break: break-all;  //使英文和数字自动换行
+    word-break: break-all; //使英文和数字自动换行
     margin: 0;
     line-height: $lineHeight;
     color: $textColor;
@@ -39,83 +36,115 @@ textarea {
     font-family: $baseFont;
 }
 
-h1,h2,h3,h4,h5,h6,p,figure,form,blockquote {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+form,
+blockquote {
     margin: 0;
 }
 
 // ul ol dl
-ul,ol,li,dl,dd {
+ul,
+ol,
+li,
+dl,
+dd {
     margin: 0;
     padding: 0;
 }
 
-ul,ol {
+ul,
+ol {
     list-style: none outside none;
 }
 
 // hn
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     line-height: 2;
     font-weight: normal;
 }
 
-p{
+p {}
 
-}
 // icon
 i {
     font-style: normal;
 }
 
 // Android 下 input focus 消除高亮外框
-textarea, input {
+textarea,
+input {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -webkit-user-modify: read-write-plaintext-only;
     outline: none !important;
 }
 
 input::-webkit-inner-spin-button {
-    -webkit-appearance: none;    /* 上下小箭头按钮 */
+    -webkit-appearance: none;
+    /* 上下小箭头按钮 */
 }
 
-input, textarea{
-    caret-color: #4A90E2;// 输入框光标颜色
+input,
+textarea {
+    caret-color: #4A90E2; // 输入框光标颜色
 }
+
 input[type="text"],
 input[type="tel"],
 input[type="number"],
-textarea{
+textarea {
     -webkit-appearance: none;
     -moz-appearance: textfield;
 }
 
-em{
-  font-style: normal;
+em {
+    font-style: normal;
 }
-
 
 // 所有元素为border-box
 * {
     box-sizing: border-box;
 }
 
-a:hover{
-  text-decoration: none !important;
+a:hover {
+    text-decoration: none !important;
 }
 
-li{
-  list-style: none;
+li {
+    list-style: none;
 }
 
-::placeholder{
-  color: $lighter;
+::placeholder {
+    color: $lighter;
 }
 
 // safari img不能有content
-img{
-  content: initial !important;
+img {
+    content: initial !important;
 }
 
-iframe{
+iframe {
     display: block;
+}
+
+//对animate.css的补充
+.animated.infinite-2 {
+    -webkit-animation-iteration-count: 2;
+    animation-iteration-count: 2;
+}
+
+.animated.infinite-3 {
+    -webkit-animation-iteration-count: 3;
+    animation-iteration-count: 3;
 }

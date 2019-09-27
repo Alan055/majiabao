@@ -24,4 +24,5 @@ module.exports = {
     kingPath: kingPath,
     staticPath: '"https://static.sinawallent.com"',
     operation: '"https://api.sinawallent.com/opts/api/optking/"', //运营线
+    emptyAPi:'""', //特殊情况，无前缀，接口地址通过接口下发
 };

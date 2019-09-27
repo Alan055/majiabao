@@ -86,7 +86,7 @@ async function checkLocationPermission(realcheck) {
     // 自定义提示
     await MessageBox({
       title: '温馨提示',
-      message: '大王贷款想获取您的位置信息，请允许，否则会影响您的借款相关操作',
+      message: '极速熊猫想获取您的位置信息，请允许，否则会影响您的借款相关操作',
       confirmButtonText: '我知道了',
       closeOnClickModal: false
     })

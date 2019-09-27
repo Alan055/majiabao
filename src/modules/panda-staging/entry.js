@@ -7,6 +7,7 @@ import router from "./router";
 import conifg from '@/modules/entryConfig'
 import adsInfo from './statisticsInfo';
 import stat from '@/statistic/home'
+import diversion from '@/statistic/diversion'
 
 import api from "@/services/api.js";
 import AppBridge from "@/services/AppBridge.js";
@@ -27,6 +28,7 @@ console.log('appName2', mixins)
 document.title = mixins.appName2;
 
 Vue.prototype.stat = stat;
+Vue.prototype.stat_diversion = diversion;
 Vue.prototype.adsInfo = adsInfo;
 
 Vue.prototype.$api = api;

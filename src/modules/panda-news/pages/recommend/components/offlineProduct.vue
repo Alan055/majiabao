@@ -13,7 +13,7 @@
                     <!-- <div class="desc">线下贷款，面签拿大额</div> -->
                 </div>
                 <div class="c-col-40 el-btn">
-                    <mt-button class="btn-round handle-button" size="normal" type="primary" @click.native="$root.openUrl({url: data.nextpage.url, isFull: true}, resdata)">立即前往</mt-button>
+                    <mt-button class="btn-round handle-button" size="normal" type="primary" @click.native="$root.openUrl({url: data.nextpage.url, isFull: false}, resdata)">立即前往</mt-button>
                 </div>
             </div>
         </div>

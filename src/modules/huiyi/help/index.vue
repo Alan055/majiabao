@@ -241,7 +241,7 @@ export default {
   filters:{
     filtersDwdk: (str) => {
       return str;
-　　　  //return str.replace(/大王贷款/ig, "大王贷款")
+　　　  //return str.replace(/极速熊猫/ig, "极速熊猫")
 　　}
 　}
 

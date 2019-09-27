@@ -149,23 +149,13 @@
 
                 if (this.$root.isApp) {
 
-                    let path = location.href.split('/pages')[0];
-
-                    let url = path + `/pages/my/#/agreements/loanList/${this.routeParams.productid}/${this.routeParams.orderid}`;
-                    this.$AppBridge.getInitData(res => {
-                        if (res && res.data.pageaddress) {
-                            let agreement = res.data.pageaddress.filter((item) => {
-                                return item.type == 'LOAN_AGREEMENT'
-                            })
-                            if (agreement.length > 0 && agreement[0].url != '') {
-                                url = agreement[0].url + '/' + this.routeParams.productid + '/' + this.routeParams.orderid;
-                            }
-                        }
-                    })
-                    this.$root.openUrl({
-                        url: url,
-                        title: '借款协议'
-                    });
+	                this.$AppBridge.getInitData(res => {
+		                if (res && res.data.pageaddress) {
+			                let agreement = res.data.pageaddress.find(e=>(e.type == 'USER_AGREEMENTS'))
+			                console.log("跳转的url", agreement.url)
+			                this.$root.openUrl({url: agreement.url+'/' + this.routeParams.productid + '/' + this.routeParams.orderid, title: '借款协议'});
+		                }
+	                })
 
                 } else {
 

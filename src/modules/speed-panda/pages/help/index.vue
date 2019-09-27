@@ -8,7 +8,7 @@
       <c-header
         ref="transparentHeader"
         class="header"
-        :style="`background: rgba(255, 255, 255, ${headerRgba}); color: black;`"
+        :style="`background: rgba(255, 255, 255, 1); color: black;`"
         title="帮助中心"
         :show="true"
       >
@@ -19,7 +19,7 @@
           class="posi-r"
         >
           <mt-button>
-            <img class="c-icon icon_b" :src="require('../../assets/images/message@2x.png')">
+            <img class="c-icon icon_b" :src="require('../../assets/images/message@2x.png')" />
           </mt-button>
         </span>
       </c-header>
@@ -60,13 +60,13 @@
             @click="handleTypeClick(item)"
           >
             <div class="el-content">
-              <img :src="item.iconurl">
+              <img :src="item.iconurl" />
               {{item.title}}
             </div>
           </div>
         </div>
       </div>
-      <watermark/>
+      <watermark />
     </div>
   </div>
 </template>
@@ -83,7 +83,7 @@ export default {
   data() {
     return {
       messageUrl: process.env.kingPath + "/pages/speed-panda/#/message", //消息中心
-      onlineServiceUrl: "",
+      onlineServiceURL: "",
       activeHeight: "40vh",
       hostData: [
         {
@@ -136,7 +136,7 @@ export default {
         console.log("pageaddress", res);
 
         if (
-          res.code === "200" &&
+          res.code == "200" &&
           res.data &&
           res.data.pageaddress &&
           res.data.pageaddress.length

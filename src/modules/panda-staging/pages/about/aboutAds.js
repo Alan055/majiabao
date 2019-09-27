@@ -7,7 +7,7 @@ let index = {
   clickGoMarket: prefix_index + '01', // 点击“去好评”
   clickGoFeedback: prefix_index + '02', // 点击“意见反馈”
   clickGoAgreements: prefix_index + '03',  // 点击“免责申明”
-  clickAboutSinaif: prefix_index + '04', // 点击“关于大王贷款”
+  clickAboutSinaif: prefix_index + '04', // 点击“关于极速熊猫”
   clickCheckVersion: prefix_index + '05', // 点击“检查更新”
   clickMessagePush: prefix_index + '06', // 点击“消息设置”
   clickWeiXinCopy: prefix_index + '07', // 点击“官方微信”

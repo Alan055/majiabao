@@ -82,7 +82,7 @@ export default {
   name: "help",
   data() {
     return {
-      messageUrl: process.env.kingPath + "/pages/speed-panda/#/message", //消息中心
+      messageUrl: process.env.kingPath + "/pages/panda-android/#/message", //消息中心
       onlineServiceUrl: "",
       activeHeight: "40vh",
       hostData: [

@@ -25,8 +25,12 @@
 import axios from "axios"; // 使用 axios 做请求
 import qs from "qs";
 import store from "../store";
-import { Toast } from "@/utils/helper";
-import { Indicator } from "@/utils/helper";
+import {
+    Toast
+} from "@/utils/helper";
+import {
+    Indicator
+} from "@/utils/helper";
 import util from "@/utils";
 import storage from "@/utils/storage";
 import helper from "@/utils/helper";
@@ -98,6 +102,27 @@ Rest.prototype = {
             appBridge.request(data, resolve)
         })
     },
+
+    //自定义伪协议请求
+    emptyRequest(path, data, config = {}, method = 'post') {
+        data = mergeBaseData(data)
+        for (let key in data) {
+            if (typeof data[key] == 'object') {
+                data[key] = JSON.stringify(data[key])
+            }
+        }
+        if (!data.hasOwnProperty('json')) {
+            data.json = config.hasOwnProperty('json') ? config.json : true
+        }
+        data.url = path
+        data.method = method
+
+        console.error('自定义伪协议请求===>', JSON.stringify(data, null, 2));
+        return new Promise((resolve, reject) => {
+            appBridge.request(data, resolve)
+        })
+    },
+
     //活动请求
     activityRequest(path, data) {
         data = mergeBaseData(data)
@@ -123,7 +148,12 @@ Rest.prototype = {
      * @param data  接口数据
      * @param setting  axios设置
      */
-    outsideRequest({ api, type, data, setting }) {
+    outsideRequest({
+        api,
+        type,
+        data,
+        setting
+    }) {
 
         let res = formData(mergeBaseData(data));
 
@@ -135,13 +165,18 @@ Rest.prototype = {
             data: res,
             headers: {}
         }
-        return doAxios(Object.assign(BaseSetting, setting))
+        return doAxios(Object.assign(BaseSetting, setting), function(d) {
+            success({
+                url: api,
+                params: mergeBaseData(data),
+                data: d
+            })
+        })
 
     },
     // web请求
     webRequest(path, data, config = {}) {
         data = mergeBaseData(data)
-
         let token = util.getParams('token') || storage.get('token');
         if (data.hasOwnProperty('token') && data.token) {
             token = data.token
@@ -155,11 +190,15 @@ Rest.prototype = {
             data,
             transformRequest: [function(data, headers) {
                 // Do whatever you want to transform the data
-                return qs.stringify({ params: JSON.stringify(data) });
+                return qs.stringify({
+                    params: JSON.stringify(data)
+                });
             }],
             headers: {
                 // token放在地址栏或者localstorage
-                "token": token
+                "token": token,
+                "mjbname": util.getParams('mjbname') || '',
+                "productId": util.getParams('productId') || '2001'
             }
         };
         return doAxios(util.extend(setting, config))
@@ -174,7 +213,9 @@ function formData(obj) {
     return result;
 }
 
-export { formData }
+export {
+    formData
+}
 
 /* 格式化请求路径
     @param path 请求路径
@@ -202,13 +243,16 @@ function parse(path, params) {
 }
 
 
-function success(setting, res) {
-    console.group("请求地址：", setting.url);
-    console.groupCollapsed("参数：", setting);
-    console.groupEnd();
-    console.groupCollapsed("响应数据：", res.data);
-    console.groupEnd();
-    console.groupEnd();
+function success(setting) {
+    /** vConsole 不支持
+     console.group("请求地址：", setting.url);
+     console.groupCollapsed("参数：", setting);
+     console.groupEnd();
+     console.groupCollapsed("响应数据：", res.data);
+     console.groupEnd();
+     console.groupEnd(); */
+
+    console.info("请求地址：", setting.url, "\n参数：", setting.params, "\n响应数据：", setting.data);
     // if (res.status.code == "403" && location.hash != '#/login') {
     //   storage.remove(['token'])
     //   location.hash = '/';
@@ -240,7 +284,11 @@ function fail(e) {
 
 // 普通请求
 function requestHelper(type, path, data, config = {}) {
-    util.extend(config, { method: type, url: path, data })
+    util.extend(config, {
+        method: type,
+        url: path,
+        data
+    })
     let setting = apiSetting(config);
     return doAxios(setting)
 }
@@ -261,7 +309,9 @@ function uploadHelper(path, formdata, config) {
 
     let setting = util.extend({
         url: path,
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+            "Content-Type": "multipart/form-data"
+        },
         baseURL: process.env.uploadApi,
         data: formdata,
         timeout: 60000,
@@ -305,7 +355,7 @@ function apiSetting(config) {
 }
 
 // 请求主体
-function doAxios(setting) {
+function doAxios(setting, cb) {
     return new Promise((resolve, reject) => {
         // 断网处理
         if (!helper.isOnline()) {
@@ -314,7 +364,7 @@ function doAxios(setting) {
             return false
         }
         axios(setting).then(res => {
-            success(setting, res)
+            cb && cb(res.data)
             resolve(res.data)
         }).catch(e => {
             fail(e)
@@ -325,8 +375,11 @@ function doAxios(setting) {
 
 // 合并参数
 function mergeBaseData(data) {
-    let baseData = {
-        // userid: "1"
+    let baseData = store.state.baseData;
+    for (var key in baseData) {
+        if (baseData[key] === '') {
+            delete baseData[key]
+        }
     }
     return util.extend({}, data, baseData);
 }

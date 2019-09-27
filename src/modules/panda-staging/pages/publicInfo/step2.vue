@@ -343,7 +343,8 @@
                         message: "亲，您离成功只差一步之遥，放弃简直太可惜了！",
                         showCancelButton: true,
                         confirmButtonText: "我再想想",
-                        cancelButtonText: "坚决离开"
+                        cancelButtonText: "坚决离开",
+	                    rightColor: '030303',
                     }).then(action => {
                         if (action == "cancel") {
                             this.sinaAds.click(this.stat.publicInfo.contacts.leave);

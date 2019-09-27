@@ -9,7 +9,7 @@
       <div class="content-wrap" v-min-height>
         <div class="id-card-input">
           <div class="card-list" v-sina-ads="stat.publicInfo.idCard.pos">
-            <p class="section-title">请拍摄身份证正面照</p>
+            <p class="section-title">请拍摄身份证人像面</p>
             <photo-scan
               v-model="formData.posimageurl"
               :readonly="!cardImageEditable"
@@ -33,7 +33,7 @@
             <p class="el-desc">{{formData.posimageurl ? '确保身份证完整清晰后再提交，点击可拍摄' : '身份证完整，身份证号清晰' }}</p>
           </div>
           <div class="card-list" v-sina-ads="stat.publicInfo.idCard.opp">
-            <p class="section-title">请拍摄身份证反面照</p>
+            <p class="section-title">请拍摄身份证国徽面</p>
             <photo-scan
               v-model="formData.oppimageurl"
               :readonly="!cardImageEditable"
@@ -69,7 +69,7 @@
         </div>
 
         <div class="c-section id-card-info" v-if="formData.posimageurl" @click="watchResize">
-         <!-- <div class="c-section id-card-info"  @click="watchResize">-->
+          <!-- <div class="c-section id-card-info"  @click="watchResize">-->
           <form-control
             title="真实姓名"
             v-model="formData.cardname"
@@ -329,7 +329,9 @@ export default {
           message: "亲，提交资料即可快速完成下款哦！",
           showCancelButton: true,
           confirmButtonText: "我再想想",
-          cancelButtonText: "坚决离开"
+          cancelButtonText: "坚决离开",
+	        rightColor: '030303',
+
         }).then(action => {
           if (action == "cancel") {
             this.sinaAds.click(this.stat.publicInfo.idCard.leave);
@@ -502,6 +504,8 @@ export default {
           this.deleteTag.name = true;
           this.deleteTag.no = true;
         }
+        // 扫完前面自动去扫描后面 如果背面没有扫描的话自动触发
+          !this.formData.oppimageid && this.$refs.idCardBack.scan()
       } else if (obj.type == "back") {
         this.formData.oppimageid = obj.fileId;
       }
@@ -744,15 +748,14 @@ export default {
   }
 };
 </script>
-
 <style lang="scss" scoped>
+.view-step1 {
+  background: #f5f5f5;
+}
 
-    .view-step1{
-        background: #f5f5f5;
-    }
 /deep/ .mint-cell-wrapper {
   //border: 0 !important;
-    border: 0;
+  border: 0;
 }
 /deep/ .bg-img-wrap {
   height: 100%;
@@ -840,25 +843,22 @@ export default {
     letter-spacing: -0.29px;
   }
   .id-card-info {
-      li{
+    li {
+      &:nth-child(2) {
+        //@extend %border-b;
 
-          &:nth-child(2){
-              //@extend %border-b;
-
-              /deep/ .mint-cell-wrapper {
-                  //border: 0 !important;
-                  border: 0;
-              }
-          }
+        /deep/ .mint-cell-wrapper {
+          //border: 0 !important;
+          border: 0;
+        }
       }
+    }
     @extend %border-b;
 
-      /deep/ .mint-cell-wrapper{
-          @extend %border-b;
-      }
-
+    /deep/ .mint-cell-wrapper {
+      @extend %border-b;
+    }
   }
-
 
   .id-card-input {
     .photo-scan {

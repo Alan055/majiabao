@@ -8,31 +8,12 @@ import appBridge from "./AppBridge";
 import util from "@/utils";
 
 //外部请求的Api
-const outsideApi = ['activity', 'offline', 'operation'];
+const outsideApi = ['activity', 'offline', 'operation', 'emptyAPi'];
 
-const request = function(api, type, setting = {}) {
-
-    /*if (type == "activity") {
-     return function (data = {}, options) {
-       return rest.activityRequest(api, data);
-     };
-   }  else {
-     if (appBridge.isApp) {
-       // if(true){
-       // console.log(`appBrige`);
-       return function (data = {}, options) {
-         return rest.app(api, data, options);
-       };
-     } else {
-       return function (data = {}, options) {
-         return rest.webRequest(api, data);
-       };
-     }
-   }
-*/
+const request = function (api, type, setting = {}) {
 
     if (outsideApi.indexOf(type) != -1) {
-        return function(data = {}, options) {
+        return function (data = {}, options) {
             return rest.outsideRequest({
                 api,
                 type,
@@ -40,17 +21,15 @@ const request = function(api, type, setting = {}) {
                 setting
             });
         };
-
     } else {
         if (appBridge.isApp) {
 
-            // if(true){
-            // console.log(`appBrige`);
-            return function(data = {}, options) {
+            return function (data = {}, options) {
                 return rest.app(api, data, options);
             };
+
         } else {
-            return function(data = {}, options) {
+            return function (data = {}, options) {
                 return rest.webRequest(api, data);
             };
         }
@@ -59,9 +38,10 @@ const request = function(api, type, setting = {}) {
 
 };
 
-const requestUser = function(api) {
+
+const requestUser = function (api) {
     if (appBridge.isApp) {
-        return function(data = {}, options = {}) {
+        return function (data = {}, options = {}) {
             let config = util.extend({
                     json: false,
                     baseURL: process.env.apiUser
@@ -71,11 +51,41 @@ const requestUser = function(api) {
             return rest.app(api, data, config);
         };
     } else {
-        return function(data = {}, options = {}) {
+        return function (data = {}, options = {}) {
             let config = util.extend({
                     baseURL: process.env.apiUser,
                     transformRequest: [
-                        function(data, headers) {
+                        function (data, headers) {
+                            // Do whatever you want to transform the data
+                            return formData(data);
+                        }
+                    ],
+                    headers: {}
+                },
+                options
+            );
+            return rest.webRequest(api, data, config);
+        };
+    }
+};
+
+const requestEmpty = function (api) {
+    if (appBridge.isApp) {
+        return function (data = {}, options = {}) {
+            let config = util.extend({
+                    json: false,
+                    baseURL: process.env.emptyAPi
+                },
+                options
+            );
+            return rest.app(api, data, config);
+        };
+    } else {
+        return function (data = {}, options = {}) {
+            let config = util.extend({
+                    baseURL: process.env.emptyAPi,
+                    transformRequest: [
+                        function (data, headers) {
                             // Do whatever you want to transform the data
                             return formData(data);
                         }
@@ -90,7 +100,7 @@ const requestUser = function(api) {
 };
 
 export default {
-    // api: request('/api'),
+    emptyRequest: (url,setting={}) => request(url, 'emptyAPi',setting),  //适用于不确定访问前缀的接口
     login: requestUser("/sys/loginByCode"), // 登录接口
     loginCode: requestUser("/sys/sendPhoneCode"), // 登录验证码
     logout: requestUser("/sys/logout"), // 登出
@@ -106,8 +116,7 @@ export default {
         query: request("/userBase/getUserBaseInfo"), //公共信息查询
         getLoanIntentionConfig: request("/userBase/getLoanIntentionConfig"), //公共信息-借款意向查询
         callFacePlus: request("/sys/face/idcard"), //face++识别接口
-        newbiePackets: request("act/novice/queryWinRetention", 'operation'), //新手红包挽留弹窗
-
+        newbiePackets: request("act/novice/queryWinRetention", 'activity'), //新手红包挽留弹窗
     },
     home: {
         queryMatchProduct: request("/match/queryMatchProduct"), //查询商户匹配结果的接口
@@ -142,8 +151,7 @@ export default {
         getMXKConfig: request('/loan/getMXKConfig'), //获取秒下款配置
         getEntranceConfig: request('/loan/getEntranceConfig'), //获取三级商户（线下贷款）配置
         getRejectApplyList: request('/loan/getRejectApplyList'), //拒件列表
-
-        queryHomePageWelfareInfo: request("/act/welfare/queryHomePageWelfareInfo", 'operation'), //福利红包
+        queryHomePageWelfareInfo: request("/act/welfare/queryHomePageWelfareInfo", 'activity'), //福利红包
     },
     huiyi: {
         getInformation: request("/sys/getInformation"), //惠义app首页资讯
@@ -203,7 +211,7 @@ export default {
         send: request("/sys/sendSMS"),
         bindingCard: request("/sys/applyForBindingCard"), //鉴权接口
         withdrawSend: request("/withdrawCash/submitApplyPre"), // 提现 发送 短验
-        repaySend: request("/repay/requestApply") // 还款 发送 短验
+        repaySend: request("/repay/requestApplygetAppMarketInfo") // 还款 发送 短验
     },
     user: {
         // 帮助中心
@@ -256,14 +264,17 @@ export default {
     //熊猫资讯版
     pandaNews: {
         getInformationInfo: request("/information/getInformationInfo"), //资讯详情
+        getInformationList: request("/information/home/list"), //资讯列表 新街口
         getInformationCommentList: request("/information/informationInfo/comment"), //资讯详情评论列表
         saveInformationLike: request("/information/like/save"), //点赞保存
         saveInformationLikeDel: request("/information/like/del"), //点赞删除
         saveInformationCollection: request("/information/collection/save"), //收藏保存
         saveInformationCollectionDel: request("/information/collection/del"), //收藏删除
         saveInformationComment: request("/information/comment/save"), //评论保存
+    },
+    // 会员相关接口
+    member: {
 
-
-
+      getMemberRenderPage: request("/act/member/renderPage",'activity') // 会员权益领取的接口
     }
 };

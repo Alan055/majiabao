@@ -1,6 +1,7 @@
 // 首页 H1
 let moduleName = "DW_clickH1";
-
+// 首页show H1 
+let moduleShow = "DW_showH1";
 
 let livingBodyModuleName = "DW_livingBody_";
 
@@ -144,6 +145,8 @@ let publicInfo = {
         marriage: modulePublicInfo + "0309",
         // 月收入 10
         income: modulePublicInfo + "0310",
+        // 是否有信用卡 17
+        hascreditcard: modulePublicInfo + "0317",
         // 单位名称 11
         companyName: modulePublicInfo + "0311",
         // 期望借款金额 12
@@ -164,6 +167,7 @@ let recommend = {
     records: {
         openBtn: modulePublicInfo + "0401"
     },
+
     //获取二级推荐
     multiApply: {
         open: modulePublicInfo + "0402", //打开二级申请页面
@@ -265,7 +269,7 @@ let recommend = {
         level2: modulePublicInfo + "1502",
         level1Ad: modulePublicInfo + "1503",
         level2Ad: modulePublicInfo + "1504"
-    }
+    },
 };
 
 //  秒下款
@@ -290,9 +294,45 @@ let miaodai = {
     },
 }
 
+let moduleRedEnvelope = moduleName + "02" + "_";
+//推荐首页
+let redEnvelope = {
+    index: {
+        showFiexd: moduleRedEnvelope + "0101", // 右上角红包显示
+        clickFiexd: moduleRedEnvelope + "0102", // 右上角红包点击
+        showDialog: moduleRedEnvelope + "0103", // 红包弹框显示
+        clickdialogBtn: moduleRedEnvelope + "0104", // 红包弹框立即查看按钮
+        closedialogBtn: moduleRedEnvelope + "0105", // 红包弹框关闭按钮点击
+    },
+    //借款款
+    records: {
+        showRedBagCell: moduleRedEnvelope + "0201", // 红包收入cell显示
+        clickRedBagCell: moduleRedEnvelope + "0202", // 红包收入cell点击
+        showRedBagBottom: moduleRedEnvelope + "0203", // 二级商户红包入口显示
+        clcikRedBagBottom: moduleRedEnvelope + "0204", // 二级商户红包入口点击
+    },
+};
+
+let moduleTabLife = moduleName + "03" + "_";
+let tabLife = {
+	pageShow: moduleTabLife + '0101', // tab3生活页面  页面曝光
+	bannerClick: moduleTabLife + '0102', // tab3生活页面  页面曝光
+	cellClick: moduleTabLife + '0103', // tab3生活页面  页面曝光
+}
+
+let rentmobile = {
+    recommend: {
+        show: moduleShow + '10_0101', //显示
+        mobileClick: moduleName + '10_0102', //点击手机
+    }
+};
+
 export default {
     homePage,
     publicInfo,
     recommend,
-    miaodai
+    miaodai,
+    redEnvelope,
+	tabLife,
+    rentmobile,
 };

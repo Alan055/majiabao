@@ -6,19 +6,10 @@
       </div>
 
       <p class="detail">
-        {{appName}}是惠义旗下的贷款服务产品。产品结合普惠金融发展和互联网技术创新，致力于面向大众提供专业、快捷的服务，帮助客户解决资金难的问题。未来，{{appName}}将秉承谷誉“普惠金融，服务人人” 的服务宗旨，以方便快捷，健康诚信为本，通过持续不断的产品创新，为客户提供安全可靠的服务，持续为客户创造价值。
+          APP产品结合普惠金融发展和互联网技术创新，致力于面向大众提供专业、快捷的服务，帮助客户解决资金难的问题。未来，{{appName}}将秉承谷誉“普惠金融，服务人人” 的服务宗旨，以方便快捷，健康诚信为本，通过持续不断的产品创新，为客户提供安全可靠的服务，持续为客户创造价值。
       </p>
     </div>
-
-    <div class="cell-list c-section">
-      <mt-cell title="版本信息">
-        v{{appVersion}}
-      </mt-cell>
-
-      <mt-cell title="官网网站" v-if="homeLink" @click.native="go" is-link v-sinaAds="adsInfo.about.about.clickGoWebsite">
-        <span class="blue">{{homeLink}}</span>
-      </mt-cell>
-    </div>
+    <aboutCell :showPrivacy="false" :showVersion="true"></aboutCell>
   </div>
 </template>
 
@@ -26,8 +17,10 @@
   import util from "@/utils";
   import helper from "@/utils/helper";
   import AppBridge from "@/services/AppBridge.js";
+  import aboutCell from "@/components/common/aboutCell.vue";
 
   export default {
+    components: {aboutCell},
     data() {
       return {
         isShowHome: false, //官网是否显示

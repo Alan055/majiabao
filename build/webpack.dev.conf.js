@@ -6,7 +6,7 @@ const merge = require('webpack-merge')
 const path = require('path')
 const baseWebpackConfig = require('./webpack.base.conf')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin') // 这个插件是用于在html和css中增加hash值 使每次构建后引入的css文件都不一样，这样可以起到避免清理缓存
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 const portfinder = require('portfinder')
 const argv = require('yargs').argv
@@ -18,15 +18,15 @@ const HOST = process.env.HOST
 const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
-  module: { // 这里应该是loader模块  检测是什么文件  就对应用什么loader模块来装换成webpack可以处理的文件
+  module: {
     rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
   output: {
-    path: config.build.assetsRoot, // 打包时的路径
-    filename: '[name].js', // 打包时的命名
-    publicPath: config.dev.assetsPublicPath // 打包时 各个文件的引入方式 “/”是相对根路径 “./”是相对当前路径叠加
+    path: config.build.assetsRoot,
+    filename: '[name].js',
+    publicPath: config.dev.assetsPublicPath
   },
 
   // these devServer options should be customized in /config/index.js

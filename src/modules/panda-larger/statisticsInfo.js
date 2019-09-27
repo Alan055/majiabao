@@ -1,10 +1,10 @@
-import about from './about/aboutAds';
-import feedback from './feedback/feedbackAds';
-import message from './message/messageAds';
-import bill from './bill/billAds';
-import bankCard from './bankCard/bankCardAds';
+import about from './pages/about/aboutAds';
+import feedback from './pages/feedback/feedbackAds';
+import message from './pages/message/messageAds';
+import bill from './pages/bill/billAds';
+import bankCard from './pages/bankCard/bankCardAds';
 import getTrust from '@/statistic/getTrust'
-import card from './card/cardAds'
+import card from './pages/card/cardAds'
 
 
 export default {

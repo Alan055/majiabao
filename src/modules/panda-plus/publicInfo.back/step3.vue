@@ -19,7 +19,7 @@
                                v-sina-ads="stat.publicInfo.userBasicInfo.companyName" @focus="companyNameFocused=true"
                                @blur="companyNameFocused=false" placeholder="填写" v-model="formData.companyname"
                                maxlength="42"
-                               name="companyName" v-validate="'required|minChar:4'">
+                               name="companyName" v-validate="'required|minChar:8'">
                     </form-control>
                     <p class="error-tip" v-if="!companyNameFocused && errors.has('companyName')">
                         {{errors.first('companyName')}}</p>

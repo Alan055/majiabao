@@ -199,6 +199,10 @@ const apiList = [
     'getHomeData',
     'checkNotificationEnabled', //检查消息推送是否打开
     'getUserAuto', //获取sdk自动登录缓存数据
+    'exitApp', // 退出app
+    'agreeProtocol', // 首页弹框关闭之后调用这个接口 触发原生去记录一些信息
+
+
 ]
 const api = {}
 apiList.forEach(type => {

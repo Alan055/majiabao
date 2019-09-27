@@ -62,7 +62,7 @@ export default new Router({
                 {
                     path: "view",
                     name: "view",
-                    component: r => require.ensure([], () => r(require("./pages/publicInfo/view")), 'view')
+                    component: r => require.ensure([], () => r(require("@/modules/panda/pages/publicInfo/view")), 'view')
                 },
                 {
                     path: "/stepLoading",
@@ -169,12 +169,6 @@ export default new Router({
             name: "about",
             component: r => require.ensure([], () => r(require("./pages/about/index.vue")), 'about'),
         },
-        // 介绍
-        {
-            path: "/test",
-            name: "test",
-            component: r => require.ensure([], () => r(require("./pages/test.vue")), 'about'),
-        },
         // 红包
         {
             path: "/redpacket",
@@ -204,6 +198,18 @@ export default new Router({
             path: '/feedback',
             component: routerView,
             children: transformRoutes(feedback)
+        },
+        // 首页弹框
+        {
+            path: '/homeDialog',
+            component: 'homeDialog',
+            component: r => require.ensure([], () => r(require("./pages/home_dialog/index")), 'home_dialog'),
+        },
+        // 首页弹框
+        {
+            path: '/tabLife',
+            component: 'tabLife',
+            component: r => require.ensure([], () => r(require("./pages/tabLife/index")), 'tabLife'),
         },
         //账单
         {

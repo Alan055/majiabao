@@ -1,7 +1,7 @@
 <template lang="html">
     <!-- 三级商户，线下大额贷款 -->
     <div class="model offline-wrap" v-if="data">
-        <div class="offline-content" @click="$root.openUrl({url: data.nextpage.url, isFull: true}, resdata)">
+        <div class="offline-content" @click="$root.openUrl({url: data.nextpage.url, isFull: false}, resdata)">
 
         </div>
     </div>

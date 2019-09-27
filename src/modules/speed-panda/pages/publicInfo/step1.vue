@@ -2,7 +2,7 @@
   <div class="view-step1 view-public-info-step c-bg-gray" ref="view">
     <c-header title="身份信息">
       <mt-button slot="left" @click="handleBack">
-        <c-icon type="back"/>
+        <c-icon type="back" />
       </mt-button>
     </c-header>
     <div class="c-view-content" ref="content">
@@ -26,7 +26,7 @@
                 slot="default-img"
                 :style="`height: 100%; background: url(${require('../../assets/images/renxiang.png')}) no-repeat;background-size: 100% 100%;`"
               >
-                <img src="../../assets/images/paishe.png" alt>
+                <img src="../../assets/images/paishe.png" alt />
                 <p class="paishe">点击扫描</p>
               </div>
             </photo-scan>
@@ -48,7 +48,7 @@
                 slot="default-img"
                 :style="`height: 100%; background: url(${require('../../assets/images/guohui.png')}) no-repeat;background-size: 100% 100%;`"
               >
-                <img src="../../assets/images/paishe.png" alt>
+                <img src="../../assets/images/paishe.png" alt />
                 <p class="paishe">点击扫描</p>
               </div>
             </photo-scan>
@@ -118,7 +118,6 @@ import { Toast, Indicator, MessageBox } from "@/utils/helper";
 import { mapGetters, mapMutations } from "vuex";
 import stepProgress from "./components/stepProgress";
 import photoScan from "./components/photoScan";
-;
 import EventBus from "@/services/EventBus";
 import {
   checkCameraPermission,
@@ -319,15 +318,15 @@ export default {
         let { title, button, desc } = this.backDialog.data;
 
         MessageBox({
-          title: '温馨提示',
-        //   message: desc,
-        //   showCancelButton: true,
-        //   confirmButtonText: button[1],
-        //   cancelButtonText: button[0]
-            message: '身份采集，保证资金安全，继续申请？',
+          title: "温馨提示",
+          //   message: desc,
+          //   showCancelButton: true,
+          //   confirmButtonText: button[1],
+          //   cancelButtonText: button[0]
+          message: "身份采集，保证资金安全，继续申请？",
           showCancelButton: true,
-          confirmButtonText: '继续借款',
-          cancelButtonText: '残忍放弃'
+          confirmButtonText: "继续借款",
+          cancelButtonText: "残忍放弃"
         }).then(action => {
           if (action == "cancel") {
             this.sinaAds.click(this.stat.publicInfo.idCard.leave);
@@ -350,7 +349,7 @@ export default {
         console.log("pageaddress", res);
 
         if (
-          res.code === "200" &&
+          res.code == "200" &&
           res.data &&
           res.data.pageaddress &&
           res.data.pageaddress.length
@@ -363,21 +362,33 @@ export default {
           list.map((item, index) => {
             if (item.type === "ONLINESERVICE" && item.showmodel === "2") {
               this.onlineServiceURL = item.url;
-              console.log('this.onlineServiceURL', this.onlineServiceURL)
+              console.log("this.onlineServiceURL", this.onlineServiceURL);
               return;
             }
           });
 
-          if(this.onlineServiceURL){
-                this.$AppBridge.setWebTitleAttribute({
-                    btnType: "img",
-                    btnVal: process.env.kingPath + "/pages/speed-panda/static/icon/publicInfo/question.png2"
-                }, () => {
-                    this.$root.openUrl({url: this.onlineServiceURL, title: '在线客服'})
+          if (this.onlineServiceURL) {
+            this.$AppBridge.setWebTitleAttribute(
+              {
+                btnType: "img",
+                btnVal:
+                  process.env.kingPath +
+                  "/pages/speed-panda/static/icon/publicInfo/question.png2"
+              },
+              () => {
+                this.$root.openUrl({
+                  url: this.onlineServiceURL,
+                  title: "在线客服"
                 });
+              }
+            );
 
-                console.log('设置了客服地址', process.env.kingPath + "/pages/speed-panda/static/icon/publicInfo/question.png2")
-            }
+            console.log(
+              "设置了客服地址",
+              process.env.kingPath +
+                "/pages/speed-panda/static/icon/publicInfo/question.png2"
+            );
+          }
         }
       });
     },
@@ -745,7 +756,6 @@ export default {
     window.addEventListener("resize", () => {
       EventBus.$emit("resize");
     });
-    
   },
   beforeRouteLeave(to, from, next) {
     EventBus.$off("back");
@@ -779,7 +789,7 @@ export default {
       margin-top: -30px;
     }
     .paishe {
-      color: #FF7D4E;
+      color: #ff7d4e;
       font-size: 12px;
       margin-top: 55px;
     }
@@ -820,7 +830,7 @@ export default {
     color: #333;
   }
   .section-title {
-      border: 0 !important;
+    border: 0 !important;
   }
   .section-title2 {
     padding-left: 16px;

@@ -5,7 +5,7 @@
             :show-indicators="false" indicator-color="white">
             <van-swipe-item v-for="(item, i) in data" :key="i"
             @click="open(item)">
-                <img style="width: 100%; height: 100%;" :src="item" />
+                <img style="width: 100%; height:auto;" :src="item" />
             </van-swipe-item>
         </van-swipe>
     </div>
@@ -16,6 +16,8 @@
         swiper,
         swiperSlide
     } from "vue-awesome-swiper";
+    import {mapMutations, mapState} from "vuex";
+
 
     export default {
         props: ["resdata"],
@@ -37,8 +39,16 @@
             };
         },
         computed: {
+
+            ...mapState([
+                'driver'
+            ]),
+
             data() {
                 return this.resdata.newcards;
+            },
+            xmNewCards() {
+                return this.resdata.xm_newcardsconfig || "";
             }
         },
         components: {
@@ -46,8 +56,39 @@
             swiperSlide
         },
         methods: {
+
             open(item) {
+
+                //联合登录
+                console.log(this.driver.xm_newcardsconfig);
+                if (this.driver.xm_newcardsconfig && this.driver.xm_newcardsconfig.unloginUrl) {
+                    this.beforeDriver(this.driver.xm_newcardsconfig.unloginUrl)
+                }
+                if (this.xmNewCards) {
+                    this.sinaAds.click(
+                        {
+                            currEvent: this.stat_diversion.diversion.newcards.btnClick
+                        },
+                        () => {
+                            this.$root.openUrl(this.xmNewCards.url);
+                        }
+                    );
+                    return;
+                }
                 this.$root.openUrl(this.resdata.onekeyapplypage, this.resdata);
+            }
+        },
+
+        mounted() {
+            if (this.xmNewCards != "") {
+                this.sinaAds.display({
+                    currEvent: this.stat_diversion.diversion.newcards.show,
+                    currEventParams: {
+                        url: this.xmNewCards.url
+                    }
+                },()=>{
+                    console.error('埋点发送完成', this.stat_diversion.diversion.newcards.show);
+                });
             }
         }
     };
@@ -63,7 +104,7 @@
     .swipe-content,
     .swiper-container {
         overflow: visible;
-        height: 180px;
+        height: 190px;
     }
 
     .swipe-item {

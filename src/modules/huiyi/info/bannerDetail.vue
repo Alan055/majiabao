@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="home-page-detail view c-view">
         <div class="c-view-content">
-            <div class="title">（一）为什么选择大王贷款</div>
+            <div class="title">（一）为什么选择极速熊猫</div>
             <div class="desc">
                 <ul>
                     <li>1.额度高—最高20万额度</li>

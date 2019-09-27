@@ -26,7 +26,11 @@
             iframeUrl:  {
                 type: String,
                 default: ''
-            }
+            },
+            className: { // 这里特别注意一下   如果页面只有一个iframe就不要传这个name  这个是为了处理页面中有两个iframe时  高度共用的bug
+              type: String,
+              default: ''
+            },
         },
         mounted() {
             let self = this;
@@ -73,15 +77,24 @@
 
                 if (e.data && e.data.height) {
                     console.log('接受到message===>', e.data);
+                  if(this.className) { // 多个iframe 分开设置高度  多个的时候不能用refs的方法去修改  只能修改全局的 用jq
+                    let list = document.getElementsByTagName('iframe')
+                    for(let val of list){
+                    	if(val.src.includes(e.origin)){
+                        val.style.height = e.data.height + "px";
+                        val.parentElement.style.height = e.data.height + "px";
+                      }
+                    }
+                  }else{ // 单个iframe时  直接多全局所有的iframe(唯一)设置高度即可
                     this.$refs.iframeWrap.style.height = e.data.height + "px";
                     this.$refs.iframeContent.style.height = e.data.height + "px";
                     this.setHeightValue = e.data.height;
 
                     setTimeout(() => {
-                        document.getElementById('iframeContent').style.height = e.data.height + "px";
+                      document.getElementById('iframeContent').style.height = e.data.height + "px";
                     }, 200)
-                    EventBus.$emit('postMessage', e.data.height);
-
+                    EventBus.$emit('postMessage', e.data.height); // 这句话好像根本就订阅不到
+                  }
                 }
             }
         },

@@ -4,10 +4,10 @@
             <div class="pull-down-bg" :style='{height: activeHeight}'></div>
         </div>
 
-        <div class="c-layer" v-show="headerRgba != 0">
+        <!-- <div class="c-layer" v-show="headerRgba != 0">
             <c-header ref="transparentHeader" class="header transparent" :style="`color: rgba(0, 0, 0, ${headerRgba}); background: rgba(255, 255, 255, ${headerRgba}); opacity: ${headerOpacity}`" :title="appName2" :show="true">
             </c-header>
-        </div>
+        </div> -->
 
         <div id="spaceDiv" style="display: block; height: 120vh;"></div>
 
@@ -19,6 +19,7 @@
                     <span class="refresh-tip"><i></i>正在刷新</span>
                 </div>
             </template>
+            <!--
             <div id="blockHeaderContent" class="block-header" ref="transparentBlock"></div>
 
             <div class="header-content">
@@ -28,9 +29,9 @@
                 </span>
                 <span class="posi-r right" v-sina-ads='stat.recommend.message.mess' @click="$root.openUrl(messageUrl);redIcon=false;">
                     <img class="c-icon icon_b" src="../../assets/images/message@2x.png"/>
-                    <!-- <span v-if="redIconShow" :class="['red-icon', ['red-icon-one', 'red-icon-two', 'red-icon-three'][redIconCount.length - 1]]">{{redIconCount}}</span> -->
+                    <span v-if="redIconShow" :class="['red-icon', ['red-icon-one', 'red-icon-two', 'red-icon-three'][redIconCount.length - 1]]">{{redIconCount}}</span>
                 </span>
-            </div>
+            </div> -->
 
             <broadcast />
 
@@ -442,7 +443,7 @@ export default {
       this.$AppBridge.getInitData({ type: "pageaddress" }, res => {
         console.log("pageaddress", res);
         if (
-          res.code === "200" &&
+          res.code == "200" &&
           res.data &&
           res.data.pageaddress &&
           res.data.pageaddress.length
@@ -455,7 +456,7 @@ export default {
           list.map((item, index) => {
             if (item.type === "ONLINESERVICE" && item.showmodel === "2") {
               this.onlineServiceURL = item.url;
-              console.log('this.onlineServiceURL', this.onlineServiceURL)
+              console.log("this.onlineServiceURL", this.onlineServiceURL);
               return;
             }
           });
@@ -708,8 +709,8 @@ export default {
   }
 }
 .section-title {
-    border: 0;
-    padding-left: 16px;
+  border: 0;
+  padding-left: 16px;
 }
 .icon_b {
   width: 22px;

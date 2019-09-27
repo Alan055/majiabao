@@ -20,7 +20,7 @@ function generator(module){
         step:module + '0101',
         //点击协议 勾选项
         agreementCheck:module + '0102',
-        //点击通用大王贷款平台协议
+        //点击通用极速熊猫平台协议
         agreementGeneral:module + '0103',
         // 点击 相关协议
         agreementRelated:module + '0104',

@@ -3,17 +3,19 @@ const path = require('path')
 const config = require('../config')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const packageConfig = require('../package.json')
-const glob = require('glob') // 匹配路径中文件的插件
-const merge = require('webpack-merge') // 合并对象的插件
-const HtmlWebpackPlugin = require('html-webpack-plugin') // html中将css文件加上hash值  保证每次打包的css都不一样  这样用户就不需要清楚缓存来清空css了
+const glob = require('glob')
+const merge = require('webpack-merge')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const argv = require('yargs').argv
 let open = argv.open  //open 指定打包
-open && (open = open.replace(/^\//, '').replace(/\/$/, '')) // 如果存在就去掉两边的斜杠
+if(open) {
+  open = open.replace(/^\//, '').replace(/\/$/, '')
+}
 
 const cliParams = require('./cliParams')
 const theme = JSON.parse(cliParams.theme)
 
-let dev = process.env.NODE_ENV != 'production' // 当前环境是不是开发环境
+let dev = process.env.NODE_ENV != 'production'
 
 exports.currentTheme = theme
 
@@ -42,7 +44,6 @@ exports.cssLoaders = function (options) {
     }
   }
 
-  // 这里是设置全局样式的
   // generate loader string to be used with extract text plugin
   function generateLoaders (loader, loaderOptions) {
     const loaders = options.usePostCSS ? [cssLoader, postcssLoader] : [cssLoader]
@@ -103,7 +104,6 @@ exports.cssLoaders = function (options) {
   }
 }
 
-// loader中的样式模块 根据是样式文件less、stylus、scss等文件  然后选择对应额loader[less或stylus或scss]模块来转换成webpack可以处理的模块
 // Generate loaders for standalone style files (outside of .vue)
 exports.styleLoaders = function (options) {
   const output = []
@@ -116,7 +116,7 @@ exports.styleLoaders = function (options) {
       use: loader
     })
   }
-    // 格式是 [{ test: /\.less$/, use: 'less-loader' }]
+
   return output
 }
 
@@ -138,28 +138,26 @@ exports.createNotifierCallback = () => {
   }
 }
 
-// 根据环境和参数 来确定是否要单独打包 一起打包 或者全部启动  从而返回相应的一个或多个entry.js的位置
 const entries = function() {
-    // 是否是指定打包
   if(open) {
-    if(!dev) { // 如果是生产环境时
+    if(!dev) {
       console.log('指定打包模式下只会打包第一个模块');
-      return glob.sync(`./src/modules/${open}/entry.js`); // 一般都会走到这儿来
-    } else {
+      return glob.sync(`./src/modules/${open}/entry.js`);
+    }
+    else {
       return glob.sync(`./src/modules/${open}/**/entry.js`);
     }
   }
   else {
-    return glob.sync('./src/modules/**/entry.js') // 同步匹配 /src/modules/ 目录下 某个下级文件夹下 的entry.js文件 也就是所有的entry.js 这个就是多入口
+    return glob.sync('./src/modules/**/entry.js')
   }
 }()
 
-// 多入口的配置
 exports.getEntries = function () {
   const entry = {}
   for (const path of entries) {
-    const chunkName = path.slice('./src/modules/'.length, -'/entry.js'.length) // 获取 /src/modules/ 目录和 entry.js  文件中间的这个文件夹的名称
-    entry[chunkName] = path // 用这个名称来作为打包后台的多出口文件夹目录
+    const chunkName = path.slice('./src/modules/'.length, -'/entry.js'.length)
+    entry[chunkName] = path
   }
   entry['babel-polyfill'] = 'babel-polyfill';
   return entry

@@ -1,11 +1,11 @@
 <template lang="html">
     <div class="view">
-        <div class="c-layer">
+        <!-- <div class="c-layer">
             <c-header ref="transparentHeader" class="header transparent" :title="appName2" :show="true">
             </c-header>
-        </div>
+        </div> -->
         <div class="c-view-content">
-            <div class="nopass-content">
+            <!-- <div class="nopass-content">
                 <div id="blockHeaderContent" class="block-header" ref="transparentBlock"></div>
 
                 <div class="header-content">
@@ -18,7 +18,7 @@
                         <span v-if="redIconShow" :class="['red-icon', ['red-icon-one', 'red-icon-two', 'red-icon-three'][redIconCount.length - 1]]">{{redIconCount}}</span>
                     </span>
                 </div>
-            </div>
+            </div> -->
 
             <div class="no-pass">
                 抱歉，您当前暂没有匹配的商户~
@@ -56,7 +56,8 @@ export default {
   data() {
     return {
       messageUrl: process.env.kingPath + "/pages/speed-panda/#/message", //消息中心
-      repayUrl: process.env.kingPath + "/pages/speed-panda/#/recommend/repayList", //还款列表
+      repayUrl:
+        process.env.kingPath + "/pages/speed-panda/#/recommend/repayList", //还款列表
       onlineServiceUrl: "",
       redIconShow: false,
       redIconCount: "0",
@@ -403,7 +404,7 @@ export default {
       this.$AppBridge.getInitData({ type: "pageaddress" }, res => {
         console.log("pageaddress", res);
         if (
-          res.code === "200" &&
+          res.code == "200" &&
           res.data &&
           res.data.pageaddress &&
           res.data.pageaddress.length
@@ -426,7 +427,7 @@ export default {
   created() {
     this.getOnlineService();
     this.init();
-    console.log('created')
+    console.log("created");
     EventBus.$on("postMessage", this.postMessageHandle);
   },
   destroyed() {
@@ -434,7 +435,7 @@ export default {
   },
   mounted() {
     this.$root.setStatusColor("white");
-    console.log('mounted')
+    console.log("mounted");
     this.$nextTick(() => {
       this.loadingClose();
     });

@@ -1,7 +1,7 @@
 <template lang="html">
     <!-- 三级商户，线下大额贷款 -->
     <div class="model">
-        <img v-if="data" :src="data.entrancepic"  @click="$root.openUrl({url: data.nextpage.url, isFull: true}, resdata)" />
+        <img v-if="data" :src="data.entrancepic"  @click="$root.openUrl({url: data.nextpage.url, isFull: false}, resdata)" />
     </div>
 </template>
 

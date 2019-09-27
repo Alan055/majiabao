@@ -1,13 +1,14 @@
-# 大王贷款马甲包 vue mpa
+# 极速熊猫马甲包 vue mpa
 
 > this is a vue mpa(multi-page-application) project
 
 ## config 文件夹注释
 
--   k8s-dev.env.js 本地开发环境配置
--   k8s.env.js 测试环境配（dev、test 打包）
--   prod.env.js 生产环境配置
--   webpack.proxy.config.js webpack 跨域代理配置
+- actest.env 马甲包本地开发/actest 测试环境配置，对应 king-actest wifi
+- test.env 测试环境(原极速熊猫)，对应 king-test wifi
+- box.env sdk 沙箱环境
+- prod.env.js 生产环境配置
+- webpack.proxy.config.js webpack 跨域代理配置
 
 ## 开始使用
 
@@ -19,57 +20,54 @@ npm config set registry https://registry.npm.taobao.org
 npm install
 
 # 本地开发环境运行独立模块
-npm run dev -- --env=k8s --open=panda-staging
-# 如需调试测试环境数据，打开webpack.proxy.config line3注释后重启
-# 如需调试个人中心的接口（如帮助中心），打开webpack.proxy.config line26注释后重启
-# 如需调试测试环境数据（如福利模块、商业化地址等），将本地dns设置192.168.1.92
+npm run dev -- --env=actest --open=panda-staging
 
-# 协议运行
-gulp build --env=k8s-dev 协议打包
-gulp agreement --env=k8s-dev  协议运行
+# 生产环境单个马甲包打包（测试环境env=actest/test）
 
-# 开发、测试环境打包
-npm run build-quick -- k8s
+npm run build -- --env=actest --open=panda-plus --vs=v1.1.0
+npm run build -- --env=actest --open=panda-larger --vs=v1.1.0
+npm run build -- --env=actest --open=panda-larger-welfare --vs=v1.1.0
+npm run build -- --env=actest --open=panda --vs=v1.1.0
+npm run build -- --env=actest --open=panda-loan --vs=v1.1.0
+npm run build -- --env=actest --open=panda-easy --vs=v1.1.0
+npm run build -- --env=actest --open=panda-flash --vs=v1.1.0
+npm run build -- --env=actest --open=speed-panda --vs=v1.1.0
+npm run build -- --env=actest --open=panda-android --vs=v1.1.0
+npm run build -- --env=actest --open=panda-news --vs=v1.1.0
+npm run build -- --env=actest --open=panda-common --vs=v1.1.0
+npm run build -- --env=actest --open=panda-first --vs=v1.1.0
+npm run build -- --env=actest --open=panda-agreements --vs=v1.1.0
+npm run build -- --env=actest --open=panda-staging-drawLottery --vs=v1.1.0
 
-# 生产环境打包（sina-ui补件项除外）
-npm run build-quick -- prod
-# 生产环境打包
-npm run build-all -- prod
+npm run build -- --env=actest --open=panda-staging  放根目录
+npm run build -- --env=actest-panda-staging --open=panda-staging
 
-# 版本号打包
-## 开发测试环境
-npm run build-quick -- k8s --vs=v1.1.0
-## 生产环境
-npm run build-all -- prod --vs=v1.1.0
+npm run build -- --env=actest --open=panda-credit  放根目录
+npm run build -- --env=actest-panda-credit --open=panda-credit
 
-# 分模块打包
-npm run build -- --env=k8s --open=moduleName
-npm run build -- --env=prod --open=moduleName
+============================================ 生产环境分割线
 
-npm run build -- --env=prod --open=panda-plus
-npm run build -- --env=prod --open=panda-larger
-
-npm run build -- --env=prod --open=panda-staging  放根目录
-
+npm run build -- --env=prod --open=panda-plus --vs=v1.1.0
+npm run build -- --env=prod --open=panda-larger --vs=v1.1.0
+npm run build -- --env=prod --open=panda-larger-welfare --vs=v1.1.0
 npm run build -- --env=prod --open=panda --vs=v1.1.0
 npm run build -- --env=prod --open=panda-loan --vs=v1.1.0
+npm run build -- --env=prod --open=panda-easy --vs=v1.1.0
+npm run build -- --env=prod --open=panda-flash --vs=v1.1.0
 npm run build -- --env=prod --open=speed-panda --vs=v1.1.0
 npm run build -- --env=prod --open=panda-android --vs=v1.1.0
 npm run build -- --env=prod --open=panda-news --vs=v1.1.0
-目前只有panda ，panda-loan，speed-panda 加 --vs=v1.1.0
+npm run build -- --env=prod --open=panda-common --vs=v1.1.0
+npm run build -- --env=prod --open=panda-agreements --vs=v1.1.0
+npm run build -- --env=prod --open=panda-staging-drawLottery --vs=v1.1.0
+npm run build -- --env=prod --open=panda-first --vs=v1.1.0
+
+npm run build -- --env=prod --open=panda-staging  放根目录
+npm run build -- --env=prod-panda-staging --open=panda-staging
+
+npm run build -- --env=prod --open=panda-credit  放根目录
+npm run build -- --env=prod-panda-credit --open=panda-credit
 ```
-
-## 自动化构建:
-
-1. 将打包生成的 dist 替换 svn 对应文件，
-    - 地址：svn://192.168.1.29/dev/king-dev/prod
-    - 账号：king
-    - 密码：king_123
-2. 登录自动化构建网站：
-    - 地址：http://192.168.1.123:8080/jenkins/login
-    - 账号 1：king-h5-user
-    - 密码：123456
-3. k8s-static-static.sinawallent.com-大王贷款开发环境静态发布 --> Build with Parameters --> deploy_env:deploy --> version:上面 svn 提交的版本号 --> 开始构建
 
 ## 目录结构
 
@@ -91,16 +89,22 @@ npm run build -- --env=prod --open=panda-news --vs=v1.1.0
 ┃  ┣━ modules
 ┃  ┃   ┣━ huiyi                 //惠义贷款
 ┃  ┃   ┣━ qianbao               //大王钱包
-┃  ┃   ┣━ qianbao-android       //大王钱包安卓专用马甲包
+┃  ┃   ┣━ panda-agreements      //所有协议单独模块 用户登录注册和关于我们 等
+┃  ┃   ┣━ qianbao-android       //大王钱包安卓专用马甲包  [后更名为-熊猫钱包]
 ┃  ┃   ┣━ mxk                   //猛下款
-┃  ┃   ┣━ panda                 //极速熊貓
+┃  ┃   ┣━ panda                 //极速熊貓 【IOS别名：熊猫花呗】
 ┃  ┃   ┣━ panda-larger          //极速熊猫大额版
+┃  ┃   ┣━ panda-larger-welfare  //极速熊猫大额版 - tab3是福利页面
 ┃  ┃   ┣━ panda-plus            //极速熊猫plus 后更名熊猫花花
 ┃  ┃   ┣━ panda-loan            //熊猫普惠
 ┃  ┃   ┣━ speed-panda           //极速熊貓（0516）
 ┃  ┃   ┣━ panda-android         //极速熊貓安卓版
 ┃  ┃   ┣━ panda-news            //极速熊猫资讯版
-┃  ┃   ┣━ panda-staging         //熊猫分期(极速熊猫贷款)
+┃  ┃   ┣━ panda-staging         //熊猫分期(极速熊猫贷款) /熊猫有钱（安卓）
+┃  ┃   ┣━ panda-staging-drawLottery  //抽奖活动模块   单独模块
+┃  ┃   ┣━ panda-credit          //熊猫信用
+┃  ┃   ┣━ panda-flash           //熊猫闪贷
+┃  ┃   ┣━ panda-easy            //熊猫容易贷
 ┃  ┃   ┣━
 ┃  ┃   ┣━ dictionary.js         //数据字典
 ┃  ┃   ┣━ directives.js         //自定义vue全局指令
@@ -114,10 +118,9 @@ npm run build -- --env=prod --open=panda-news --vs=v1.1.0
 ┣━ test                         //伪协议和原生端交互调试
 ```
 
-## 官网地址
+## 马甲包访问地址
 
--   极速熊猫官网 www.huiyidaikuan.com
--   极速熊猫资讯版 www.jisuxmsdk.com/
+- 详情见 excel-马甲包 h5 页面地址
 
 ## 说明
 
@@ -146,22 +149,6 @@ npm run build -- --env=prod --open=panda-news --vs=v1.1.0
 
 ## 开发指引
 
--   [Vue 2.0](https://cn.vuejs.org/)
--   [Mint UI](http://mint-ui.github.io/#!/zh-cn)
--   [Vue-router](https://router.vuejs.org/zh/)
-
-## 极速熊猫贷款上线摘要
-
-1. 代码 svn: svn://svn.iask.com/svn/projects/king/app/code/html/trunk/sinaifloan-majiabao/src/modules/panda-staging
-2. actest 环境打包命令：npm run build -- --env=k8s --open=panda-staging
-3. actest 环境 svn 存放地址： http://192.168.1.58/svn/king-ac-static/panda-staging
-
-4. 生产环境打包命令：npm run build -- --env=panda-staging-prod --open=panda-staging //注意目前域名还没有定暂时写的 static.baidu.... 一定记得换域名后打包！！！！！
-5. svn://192.168.1.152/king_static/ //本次 h5 为了跟以前马甲包更多区分，地址为根目录下，目录我已建好，并放了一个 favicon.ico
-
-6. 产品文件地址：\\192.168.1.77\02 极速熊猫\V1.0 大版本截止 2019 年\极速熊猫贷款（熊猫分期）
-7. UI 地址： \\192.168.1.77\iOS 上架组\5 月份\极速熊猫贷款(新)
-
-8. 官网地址代码：svn://svn.iask.com/svn/projects/opt/base/code/html/trunk/majiabao-website/jquery/src/modules/panda-staging
-9. 官网本地启动： cd 到上面目录 jquery 这级，npm run start
-10. 官网上线： 直接复制 panda-staging 目录给运维手动发
+- [Vue 2.0](https://cn.vuejs.org/)
+- [Mint UI](http://mint-ui.github.io/#!/zh-cn)
+- [Vue-router](https://router.vuejs.org/zh/)

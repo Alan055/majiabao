@@ -1,4 +1,5 @@
 <template>
+  <div class="view">
     <div class="c-view-content" v-if="data.length">
       <div class="list-wrap">
         <div class="list-center">
@@ -8,7 +9,7 @@
                 <div class="list-item c-flex-row">
                   <div class="c-flex-item c-tl">
                     <p class="title">
-                      <img class="c-financing-logo" :src="item.iconurl" alt>
+                      <img class="c-financing-logo" :src="item.iconurl" alt />
                       {{item.name}}
                     </p>
 
@@ -23,13 +24,13 @@
                     </p>
                     <mt-button
                       v-sina-ads="{
-                                            currEvent:stat.recommend.records.openBtn,
-                                            currEventParams:{
-                                                name:item.name,
-                                                productid:item.id,
-                                                status:item.status
-                                            }
-                                        }"
+                                                currEvent:stat.recommend.records.openBtn,
+                                                currEventParams:{
+                                                    name:item.name,
+                                                    productid:item.id,
+                                                    status:item.status
+                                                }
+                                            }"
                       class="btn-round handle-button"
                       :class="getClass(item.copywrites, 3)"
                       size="normal"
@@ -48,10 +49,11 @@
       </div>
     </div>
     <no-data
-        :imgUrl="require('../../assets/images/no-bill@2x.png')"
-        text="当前无待还账单"
-        v-else-if="isFinsh && !data.length"
+      :imgUrl="require('../../assets/images/no-bill@2x.png')"
+      text="当前无待还账单"
+      v-else-if="isFinsh && !data.length"
     ></no-data>
+  </div>
 </template>
 
 <script>

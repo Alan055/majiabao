@@ -69,7 +69,7 @@
         }
     }
     .multi-apply-wrap {
-        padding: 10px 13px;
+        padding: 10px 16px;
         overflow: hidden;
         background: white;
 

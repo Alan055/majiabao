@@ -4,32 +4,30 @@ import Router from "vue-router";
 Vue.use(Router);
 
 import routerView from '@/modules/routerView'
-import {transformRoutes} from '@/modules/routerView'
-import {routes as message} from './message/router'
-import {routes as feedback} from './feedback/router'
-import {routes as bill} from './bill/router'
-import {routes as bankCard} from './bankCard/router'
+import {
+    transformRoutes
+} from '@/modules/routerView'
+import {
+    routes as message
+} from './message/router'
+import {
+    routes as feedback
+} from './feedback/router'
+import {
+    routes as bill
+} from './bill/router'
+import {
+    routes as bankCard
+} from './bankCard/router'
 
 export default new Router({
     routes: [
-
-        {
-            path: "/",
-            name: "landing",
-            component: r => require.ensure([], () => r(require("./landing")), 'landingIndex')
-        },
-        {
-            path: "/home",
-            name: "home",
-            component: r => require.ensure([], () => r(require("./home")), 'homeIndex')
-        },
 
         // 公共信息
         {
             path: "/publicInfo",
             component: r => require.ensure([], () => r(require("./publicInfo/index")), 'publicInfoContainer'),
-            children: [
-                {
+            children: [{
                     path: "",
                     redirect: '/publicInfo/step1',
                     name: "step1",
@@ -53,7 +51,7 @@ export default new Router({
                 {
                     path: "view",
                     name: "view",
-                    component: r => require.ensure([], () => r(require("./publicInfo/view")), 'view')
+                    component: r => require.ensure([], () => r(require("@/modules/panda/pages/publicInfo/view")), 'view')
                 },
                 {
                     path: "/stepLoading",
@@ -86,6 +84,12 @@ export default new Router({
             name: "nopass",
             component: r => require.ensure([], () => r(require("./card/nopass.vue")), 'nopass'),
         },
+        // 拒件记录
+        {
+            path: "/refuse",
+            name: "refuse",
+            component: r => require.ensure([], () => r(require("./refuse/index.vue")), 'refuse'),
+        },
 
         // 资讯
         {
@@ -99,7 +103,7 @@ export default new Router({
             name: "about",
             component: r => require.ensure([], () => r(require("./about/index.vue")), 'about'),
         },
-        
+
         {
             path: '/message',
             component: routerView,

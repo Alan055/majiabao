@@ -1,7 +1,7 @@
 <template lang="html">
   	<div class="bottom-info">
 		  <img class="c-icon" src="~@/assets/images/publicInfo/ba_cg@2x.png" alt="">
-		  大王贷款智能加密，保障您的信息安全
+		  极速熊猫智能加密，保障您的信息安全
 	</div>
 </template>
 

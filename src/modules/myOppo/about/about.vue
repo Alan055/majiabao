@@ -34,7 +34,7 @@
       </mt-cell>
 
       <!--
-        20190321 隐藏   需求=>>>大王贷款app内容调整
+        20190321 隐藏   需求=>>>极速熊猫app内容调整
         <mt-cell v-if="channel !='akingloan' && channel !='kingydk' && isShowWeibo" title="关注微博" @click.native="weibo" is-link
                v-sinaAds="adsInfo.about.about.clickGoWeibosite">
         <span class="blue">weibo.com/6918855300</span>

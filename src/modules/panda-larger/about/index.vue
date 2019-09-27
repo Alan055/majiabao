@@ -12,16 +12,6 @@
     <p class="detail">
     公司将严格遵守国家金融法律法规和监管政策，秉承“创新普惠金融，为您此刻好生活”的企业愿望，朝着“金融+互联网+大数据”的创新方向，以诚信、合规、稳健、创新的经营理念，致力于为普罗大众、小微企业提供有特色、优质便捷的金融服务。
     </p>
-
-    <div class="cell-list c-section">
-      <mt-cell title="版本信息">
-        v{{appVersion}}
-      </mt-cell>
-
-      <mt-cell title="官网网站" v-if="homeLink" @click.native="go" is-link v-sinaAds="adsInfo.about.about.clickGoWebsite">
-        <span class="blue">{{homeLink}}</span>
-      </mt-cell>
-    </div>
   </div>
 </template>
 
@@ -104,7 +94,7 @@
         width: 100%;
       }
     }
-    
+
   }
   .detail {
     font-size: $fontS;

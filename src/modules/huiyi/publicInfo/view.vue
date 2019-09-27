@@ -46,7 +46,7 @@
                         </div>-->
 
                         <div class="bottom-info">
-                            <img class="c-icon" src="~@/assets/images/publicInfo/ba_cg@2x.png" alt=""> 大王贷款智能加密，保障您的信息安全
+                            <img class="c-icon" src="~@/assets/images/publicInfo/ba_cg@2x.png" alt=""> 极速熊猫智能加密，保障您的信息安全
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,7 @@
                         </div>
 
                         <div class="bottom-info">
-                            <img class="c-icon" src="~@/assets/images/publicInfo/ba_cg@2x.png" alt=""> 大王贷款不会向联系人泄漏您的正常借款信息
+                            <img class="c-icon" src="~@/assets/images/publicInfo/ba_cg@2x.png" alt=""> 极速熊猫不会向联系人泄漏您的正常借款信息
                         </div>
 
                     </div>
@@ -106,7 +106,7 @@
                         </div>
 
                         <div class="bottom-info">
-                            <img class="c-icon" src="~@/assets/images/publicInfo/ba_cg@2x.png" alt=""> 大王贷款智能加密，保障您的信息安全
+                            <img class="c-icon" src="~@/assets/images/publicInfo/ba_cg@2x.png" alt=""> 极速熊猫智能加密，保障您的信息安全
                         </div>
 
                     </div>

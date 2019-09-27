@@ -1,51 +1,60 @@
 <template lang="html">
     <div class="view">
+
+        <c-header ref="transparentHeader" class="header transparent" :title="appName2" :show="browser.android"
+                  :style="`color: rgba(0, 0, 0, ${headerRgba}); background: rgba(255, 255, 255, ${headerRgba}); opacity: ${headerOpacity}`" >
+            <span slot="left" class="posi-l">
+                <c-icon type="back" @click.native="handleBack"/>
+            </span>
+            <span slot="right" class="posi-r">
+                <div class="he-inline-block" v-sina-ads='stat.recommend.online.kefu' @click="$root.openUrl(onlineServiceUrl);redIcon=false;" >
+                    <img class="c-icon icon_a" src="../../assets/images/1kefu-white@2x.png"/>
+                </div>
+                <div class="he-inline-block" v-sina-ads='stat.recommend.message.mess' @click="$root.openUrl(messageUrl);redIcon=false;" >
+                    <img class="c-icon icon_a" src="../../assets/images/1message-white@2x.png"/>
+                    <span v-if="redIconShow" :class="['red-icon', ['red-icon-one', 'red-icon-two', 'red-icon-three'][redIconCount.length - 1]]">{{redIconCount}}</span>
+                </div>
+            </span>
+        </c-header>
         <div class="c-view-content">
             <div class="m-banner" >
-                <c-header ref="transparentHeader" class="header transparent" :style="`color: rgba(0, 0, 0, ${headerRgba}); background: rgba(255, 255, 255, ${headerRgba}); opacity: ${headerOpacity}`" :title="appName2" :show="true">
-                    <span slot="right" class="posi-r">
-                        <div class="he-inline-block" v-sina-ads='stat.recommend.online.kefu' @click="$root.openUrl(onlineServiceUrl);redIcon=false;" >
-                            <img class="c-icon icon_a" src="../../assets/images/kefu-white@2x.png"/>
-                        </div>
-                        <div class="he-inline-block" v-sina-ads='stat.recommend.message.mess' @click="$root.openUrl(messageUrl);redIcon=false;" >
-                            <img class="c-icon icon_a" src="../../assets/images/message-white@2x.png"/>
-                            <span v-if="redIconShow" :class="['red-icon', ['red-icon-one', 'red-icon-two', 'red-icon-three'][redIconCount.length - 1]]">{{redIconCount}}</span>
-                        </div>
-                    </span>
-                </c-header>
-
                 <div class="no-pass">
                     <div class="title">抱歉</div>
                     <div class="sub-title">您距离分期额度卡领取门槛只差一点点，过段时间再来哟！</div>
                 </div>
             </div>
-            <div class="m-content">
-                <div class="c-flex-row c-v-center el-tabs">
-                    <div class="c-col-50" @click="$root.openUrl({url: yqhyURL, title: '征信查询'})">
-                        <div class="he-inline-block">
-                            <img src="../../assets/images/yqhy.png" />
-                        </div>
-                        <div class="he-inline-block el-text">
-                            <div class="title">邀请好友</div>
-                            <div class="sub-title">超值奖励</div>
-                        </div>
-                    </div>
-                    <div class="c-col-50" @click="$root.openUrl({url: bzzxURL, title: '征信查询'})">
-                        <div class="he-inline-block">
-                            <img src="../../assets/images/bzzx.png" />
-                        </div>
-                        <div class="he-inline-block el-text">
-                            <div class="title">帮助中心</div>
-                            <div class="sub-title">使用指南</div>
-                        </div>
-                    </div>
+            <div class="c-flex-row c-v-center el-tabs"  v-if="resourceList.length">
+                <div v-for="(v,i) in resourceList" :key="i" @click="handleTabsClick(v)">
+                <img :src="v.imgurl" alt="">
+                <span>{{v.title}}</span>
                 </div>
-                <offline-product class="section" v-if="homeData.thirdproducts" :resdata="homeData"/>
-                <!-- 征信查询  v-if="zhengxinURL" -->
-                <div class="section credit-content" @click="$root.openUrl({url: zhengxinURL, title: '征信查询'})"></div>
-                <!-- 判断是否超过1屏幕，class="el-watermark-noScreen" 如未超过添加class-->
-                <watermark />
+                <!--<div class="c-col-50" @click="$root.openUrl({url: yqhyURL, title: '征信查询'})">-->
+                    <!--<div class="he-inline-block">-->
+                        <!--<img src="../../assets/images/yqhy.png" />-->
+                    <!--</div>-->
+                    <!--<div class="he-inline-block el-text">-->
+                        <!--<div class="title">邀请好友</div>-->
+                        <!--<div class="sub-title">超值奖励</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="c-col-50" @click="$root.openUrl({url: bzzxURL, title: '征信查询'})">-->
+                    <!--<div class="he-inline-block">-->
+                        <!--<img src="../../assets/images/bzzx.png" />-->
+                    <!--</div>-->
+                    <!--<div class="he-inline-block el-text">-->
+                        <!--<div class="title">帮助中心</div>-->
+                        <!--<div class="sub-title">使用指南</div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
+            <!-- 安卓版显示贷超 -->
+            <credit-card class="section iframe-section" :style="`height: ${creditCardHeight};`" v-if="iframeUrl && browser.android && isShowIframeUrl == 1" :iframeUrl="iframeUrl" />
+            
+            <offline-product class="section" v-if="homeData.thirdproducts" :resdata="homeData"/>
+            <!-- 征信查询  v-if="zhengxinURL" -->
+            <div class="section credit-content" @click="$root.openUrl({url: zhengxinURL, title: '征信查询'})"></div>
+            <!-- 判断是否超过1屏幕，class="el-watermark-noScreen" 如未超过添加class-->
+            <watermark />
         </div>
     </div>
 </template>
@@ -82,6 +91,8 @@ export default {
       pullDown: true,
       headerOpacity: 1,
       headerRgba: 0,
+      isShowIframeUrl: util.getParams("isShowIframeUrl") || 0,
+      browser: util.browser.versions,
       activeHeight: "30vh",
       homeData: {
         apiFinish: false,
@@ -101,7 +112,8 @@ export default {
         resecondproducts: []
       }, //首页数据汇总
       iframeUrl: "", //商业化地址
-      creditCardHeight: "0" //商业地址高度
+      creditCardHeight: "0", //商业地址高度
+      resourceList: [], // 小的工具导航栏
     };
   },
   mixins: [require("../../mixins").default],
@@ -131,6 +143,7 @@ export default {
         this.getmarketinfo();
         //this.getEntranceConfig();
         this.redData();
+        this.getResourceList() // 获取资源位数据
       } catch (error) {
         this.loadingClose();
       }
@@ -175,6 +188,11 @@ export default {
       setTimeout(() => {
         this.headerOpacity = 1;
       }, 200);
+    },
+    handleBack() {
+      this.$AppBridge.activityView({
+        type: "close"
+      });
     },
 
     //获取借还款记录
@@ -454,7 +472,39 @@ export default {
           });
         }
       });
+    },
+    // 获取资源位的数据
+    getResourceList(){
+      api.activity.getApprovaling({
+          pageid: '1026',
+          //mjbname: 'pandajsxmdk', //公共参数里有
+          productId: util.getParams('productId')||'0'
+        }).then((res)=>{
+        if (helper.isSuccess(res)) {
+            if(res.data && res.data.pagedata) {
+                this.resourceList = res.data.pagedata.homepagespliterNav.pagedata
+            }
+        }
+      })
+    },
+    //tabs资源位点击
+    handleTabsClick(item) {
+        let jumplink = item.jumplink;
+        if(jumplink.includes('YS_DKJS')){
+            let pkg = jumplink.split(',');
+            if(pkg.length > 1){
+                console.log('pkg[1]', pkg[1])
+                this.$AppBridge.goNative({
+                    pkg: pkg[1]
+                })
+            }
+            return
+        }
+        this.$root.openUrl({
+            url: jumplink
+        })
     }
+
   },
   created() {
     this.getOnlineService();
@@ -495,61 +545,55 @@ export default {
 
   .m-banner {
     position: relative;
-    background: url("../../assets/images/no-pass-banner.png") no-repeat;
+    /*background: url("../../assets/images/no-pass-banner.png") no-repeat;*/
     background-size: 100%;
-    height: 220px;
 
     .no-pass {
-      position: absolute;
-      bottom: -33px;
-      height: 140px;
+      margin: 12px 16px 0 16px;
+      height: 158px;
       background: #fffeff;
       box-shadow: 0 10px 10px 0 rgba(223, 221, 246, 0.55);
       border-radius: 8px;
       text-align: left;
       padding: 30px 20px;
-      width: 90%;
-      margin-left: 5%;
       background: url("../../assets/images/card@2x.png") no-repeat;
       background-size: 100%;
-
+      color: #fff;
       .title {
-        font-size: 18px;
-        color: #1f2b5a;
+        font-size: 24px;
         margin-bottom: 8px;
       }
       .sub-title {
-        font-size: 14px;
-        color: #1f2b5a;
+        font-size: 18px;
       }
     }
   }
-  .m-content {
-    margin-top: 60px;
-
     .el-tabs {
-      .he-inline-block {
-        text-align: left;
-        img {
-          width: 44px;
+      margin: 12px 16px;
+      display: flex;
+      justify-content: left;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      div{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 25%;
+        height: 72px;
+        img{
+          width: 34px;
+          height: 34px;
         }
-
-        .title {
-          font-size: 14px;
-          color: #1f2b5a;
-        }
-        .sub-title {
+        span{
           font-size: 12px;
-          color: #66668a;
-        }
-
-        &.el-text {
-          vertical-align: top;
-          margin-top: 4px;
-          margin-left: 2px;
+          width: 100%;
+          overflow: hidden;
+          text-overflow:ellipsis;
+          white-space: nowrap;
+          color: #66668A;
         }
       }
-    }
   }
   .c-view-content {
     transition: all 0.5s;
@@ -659,7 +703,7 @@ export default {
 
 /deep/ .mint-header-title {
   margin-left: 26px;
-  color: white;
+  color: black;
 }
 .posi-r {
   position: relative;

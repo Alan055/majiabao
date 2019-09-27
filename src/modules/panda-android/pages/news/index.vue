@@ -41,7 +41,7 @@
                     <div class="news-list" @click="handleInfoClick(item)" v-for="(item, i) in informationData.infoList" :key="i">
                         <div class="list-left">
                         <div class="list-title">{{item.title}}</div>
-                        <div class="list-time">阅读：{{item.through > 100000 ? '10万+' : item.through}}</div>
+                        <div class="list-time">{{item.createtime.substr(0,10)}}</div>
                         </div>
                         <div class="list-right">
                         <div class="list-img" :style="`background-image: url(${item.iconurl})`"></div>
@@ -49,7 +49,6 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
 </template>
 
@@ -69,145 +68,9 @@
                 informationData: {
                     topInfo: [],
                     infoList: [],
-                    /*"topInfo": [
-                    {
-                        "through": 1000000003,
-                        "topType": null,
-                        "createtime": "2018-11-26 19:07:26",
-                        "orderno": 1,
-                        "productid": "2001",
-                        "subhead": null,
-                        "remark": "",
-                        "source": "",
-                        "title": "#哪种还款方式更划算#",
-                        "type": 4,
-                        "content": null,
-                        "businesstype": "0000",
-                        "createby": "wake",
-                        "openlink": "http://static.sinawallent.com/v1.1.0/pages/#/info/detail",
-                        "releasetime": "2018-11-21 00:00:00",
-                        "updateby": "wake",
-                        "iconurl": "",
-                        "id": "2019032123010006",
-                        "updatetime": "2019-05-13 11:16:48",
-                        "status": 1
-                    },
-                    {
-                        "through": 1000000003,
-                        "topType": null,
-                        "createtime": "2018-11-26 19:07:26",
-                        "orderno": 1,
-                        "productid": "2001",
-                        "subhead": null,
-                        "remark": "",
-                        "source": "",
-                        "title": "#征信知多少#",
-                        "type": 4,
-                        "content": null,
-                        "businesstype": "0000",
-                        "createby": "wake",
-                        "openlink": "http://static.sinawallent.com/v1.1.0/pages/#/info/detail",
-                        "releasetime": "2018-11-21 00:00:00",
-                        "updateby": "wake",
-                        "iconurl": "",
-                        "id": "2019032123010007",
-                        "updatetime": "2019-05-13 11:16:50",
-                        "status": 1
-                    }
-                    ],
-                    "infoList": [
-                    {
-                        "through": 1000000003,
-                        "topType": null,
-                        "createtime": "2018-11-26 19:07:26",
-                        "orderno": 1,
-                        "productid": "2001",
-                        "subhead": null,
-                        "remark": "",
-                        "source": "",
-                        "title": "信用卡积分和额度快速提升攻略",
-                        "type": 5,
-                        "content": null,
-                        "businesstype": "0000",
-                        "createby": "wake",
-                        "openlink": "http://static.sinawallent.com/v1.1.0/pages/#/info/detail",
-                        "releasetime": "2018-11-21 00:00:00",
-                        "updateby": "wake",
-                        "iconurl": "http://static.sinawallent.com/king/imgs/xiongmaopuhui_p3.png",
-                        "id": "2019032123010008",
-                        "updatetime": "2019-05-13 14:06:03",
-                        "status": 1
-                    },
-                    {
-                        "through": 1000000003,
-                        "topType": null,
-                        "createtime": "2018-11-26 19:07:26",
-                        "orderno": 1,
-                        "productid": "2001",
-                        "subhead": null,
-                        "remark": "",
-                        "source": "",
-                        "title": "家庭理财的几大错误，一定要谨记！",
-                        "type": 5,
-                        "content": null,
-                        "businesstype": "0000",
-                        "createby": "wake",
-                        "openlink": "http://static.sinawallent.com/v1.1.0/pages/#/info/detail",
-                        "releasetime": "2018-11-21 00:00:00",
-                        "updateby": "wake",
-                        "iconurl": "http://static.sinawallent.com/king/imgs/xiongmaopuhui_p4.png",
-                        "id": "2019032123010009",
-                        "updatetime": "2019-05-13 14:06:04",
-                        "status": 1
-                    },
-                    {
-                        "through": 1000000003,
-                        "topType": null,
-                        "createtime": "2018-11-26 19:07:26",
-                        "orderno": 1,
-                        "productid": "2001",
-                        "subhead": null,
-                        "remark": "",
-                        "source": "",
-                        "title": "银行是怎么判断信用卡套现的？",
-                        "type": 5,
-                        "content": null,
-                        "businesstype": "0000",
-                        "createby": "wake",
-                        "openlink": "http://static.sinawallent.com/v1.1.0/pages/#/info/detail",
-                        "releasetime": "2018-11-21 00:00:00",
-                        "updateby": "wake",
-                        "iconurl": "http://static.sinawallent.com/king/imgs/xiongmaopuhui_p5.png",
-                        "id": "2019032123010010",
-                        "updatetime": "2019-05-13 14:06:05",
-                        "status": 1
-                    },
-                    {
-                        "through": 1000000003,
-                        "topType": null,
-                        "createtime": "2018-11-26 19:07:26",
-                        "orderno": 1,
-                        "productid": "2001",
-                        "subhead": null,
-                        "remark": "",
-                        "source": "",
-                        "title": "2019年信用卡新规 卡奴一年比一年难",
-                        "type": 5,
-                        "content": null,
-                        "businesstype": "0000",
-                        "createby": "wake",
-                        "openlink": "http://static.sinawallent.com/v1.1.0/pages/#/info/detail",
-                        "releasetime": "2018-11-21 00:00:00",
-                        "updateby": "wake",
-                        "iconurl": "http://static.sinawallent.com/king/imgs/xiongmaopuhui_p6.png",
-                        "id": "2019032123010011",
-                        "updatetime": "2019-05-13 14:06:06",
-                        "status": 1
-                    }
-                    ]*/
                 },
-                moreLink: process.env.kingPath + "/pages/panda-loan/#/news/more", //更多资讯
-                detailLink: process.env.kingPath + "/pages/panda-loan/#/news/detail", //资讯详情
+                moreLink: process.env.kingPath + "/pages/panda-android/#/news/more", //更多资讯
+                detailLink: process.env.kingPath + "/pages/panda-android/#/news/detail", //资讯详情
             };
         },
         computed: {
@@ -222,7 +85,7 @@
             },
             getInfomationList() {
                 api.mxk.getInfomationList({
-                    toptype: 4, 
+                    toptype: 4,
                     type: 5
                 }).then(res => {
                     if (!helper.isSuccess(res)) return;
@@ -235,6 +98,15 @@
             },
             handleInfoClick(item) {
                 console.log('item', item)
+              if(item.openlink && item.openlink.includes('XM=0')){
+                this.$root.openUrl({
+                  type: "open",
+                  url: item.openlink,
+                  isFull: false,
+                  open_inner: true,
+                });
+                return
+              }
                 if(item == 0 || item == 1) {
                     item = this.informationData.topInfo[item]
                 }
@@ -307,7 +179,7 @@
         .c-flex-row {
             margin-left: -10px;
             margin-right: -10px;
-            
+
             .c-flex-item {
                 position: relative;
             }
@@ -321,7 +193,7 @@
             }
         }
 
-        
+
     }
 
     .news-list {

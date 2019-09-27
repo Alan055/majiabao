@@ -20,6 +20,7 @@ import api from "@/services/api";
 import { Toast, Indicator } from "@/utils/helper";
 import EventBus from "@/services/EventBus";
 import debugMixins from "./debugMixins";
+import sensors from "sa-sdk-javascript";
 
 // 解除route的循环引用
 function resolveRoute(route) {
@@ -63,10 +64,6 @@ export default {
     // 打开链接
     openUrl(url, data = {}) {
       if (!url) {
-        if (process.env.NODE_ENV != "production") {
-          //TODO 临时存放，后期去掉
-          this.toast({ msg: "找Wake配地址！" });
-        }
         return;
       }
 
@@ -199,6 +196,61 @@ export default {
       } else {
         window.history.back();
       }
+    },
+
+    //神策埋点初始化
+    initShence(extObj) {
+      console.log(
+        "project=====>" + process.env.NODE_ENV != "production"
+          ? "default"
+          : "production"
+      );
+      let data = Object.assign(
+        {},
+        {
+          // server_url: `${location.protocol}//track.sinaif.com:4006/sa?project=default`,
+          server_url: `https://track.sinaif.com:4006/sa?project=${
+            process.env.NODE_ENV != "production" ? "default" : "production"
+          }`,
+          // http://xinlangpuhui.datasink.sensorsdata.cn/sa?project=production&token=22252313ae4a6a1a
+          //heatmap_url神策分析中点击分析及触达分析功能代码，代码生成工具会自动生成。如果神策代码中 `sensorsdata.min.js` 版本是 1.9.1 及以上版本，这个参数必须配置，低于此版本不需要配置。
+          // heatmap_url: process.env.mode === 1 ? '~@/assets/lib/javaScript/heatmap.min.js' : '~@/assets/lib/javaScript/heatmap.js',
+          // heatmap_url: 'http://cdn.bootcss.com/heatmap.js/2.0.2/heatmap.min.js',
+          heatmap_url:
+            process.env.kingPath +
+            "/pages/panda-staging/static/lib/heatmap/heatmap.min.js",
+          heatmap: {
+            // 是否开启点击图，默认 default 表示开启，自动采集 $WebClick 事件，可以设置 'not_collect' 表示关闭
+            // 需要 JSSDK 版本号大于 1.7
+            clickmap: "default",
+            //是否开启触达注意力图，默认 default 表示开启，自动采集 $WebStay 事件，可以设置 'not_collect' 表示关闭
+            //需要 JSSDK 版本号大于 1.9.1
+            scroll_notice_map: "not_collect",
+            // 设置 true 后会在网页控制台打 logger，会显示发送的数据,设置 false 表示不显示。默认 true。
+            //非生产环境都输出
+            show_log: false
+            // 设置成 true 后， 表示在单页面开发的网站中，我们会对 hashchange 和 popstate 事件进行监听，当这两个事件任何一个发生时，也会发送 $pageview 事件。默认 false。
+            // is_single_page: false
+          }
+        },
+        extObj
+      );
+      sensors.init(data);
+      sensors.registerPage({
+        platform_type: "H5",
+        app_identify: "极速熊猫",
+        mjbname: util.getParams("mjbname"),
+        productid: util.getParams("productid") || 2001
+      });
+      sensors.login(util.getParams("fromUserId"));
+      sensors.quick("autoTrack", {
+        platForm: "h5"
+      });
+    },
+
+    //发送神策埋点
+    sendShence(event, eventParams = {}) {
+      sensors.track(event, eventParams);
     },
 
     // 路由跳转
@@ -460,9 +512,19 @@ export default {
     //设置body颜色，防止IOS下滑显示白屏
     setBodyColor(color) {
       document.querySelector("body").style = "background-color:" + color;
+    },
+    // 获取app的版本号
+    appVersion() {
+      let arr = [];
+      for (let val of ["appVersion", "verno", "tc", "et"]) {
+        let code = util.getParams(val);
+        code && arr.push(code);
+      }
+      return arr.join(".");
     }
   },
   created() {
+    this.initShence();
     setTimeout(() => {
       console.info("当前页面地址", window.location.href);
     }, 2000);

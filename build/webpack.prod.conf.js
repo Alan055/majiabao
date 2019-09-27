@@ -12,17 +12,19 @@ const OptimizeCSSPlugin = require("optimize-css-assets-webpack-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 // const CleanWebpackPlugin = require("clean-webpack-plugin");
 const ResourceHintWebpackPlugin = require("./preloadPlugin");
-const argv = require("yargs").argv; // 这个模式是用于解析命令行中输入的参数
-let open = argv.open; //open 就是拿到 用户在命令行里面输入的open=xxx 的值
-
-if (open) { // open存在就删除前后的斜杠 /
+const argv = require("yargs").argv;
+let open = argv.open; //open 指定打包
+if (open) {
   open = open.replace(/^\//, "").replace(/\/$/, "");
 }
-const env = argv.env || "prod"; // 如果env没有值 就默认为prod
+const env = argv.env || "prod";
 const envConfig = require(`../config/${env}.env`);
 // 指定打包模式下使用资源相对路径
-let resourceUrl = open ? "" :
-    envConfig.resourceUrl ? JSON.parse(envConfig.resourceUrl) : config.build.assetsPublicPath;
+let resourceUrl = open
+  ? ""
+  : envConfig.resourceUrl
+    ? JSON.parse(envConfig.resourceUrl)
+    : config.build.assetsPublicPath;
 
 const htmlConfig = {
   resourceUrl,
@@ -47,7 +49,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   },
   devtool: config.build.productionSourceMap ? config.build.devtool : false,
   output: {
-    path: open ? config.build.assetsRoot + "/" + open : config.build.assetsRoot, // 如果是指定文件夹就打包到指定文件夹中 不是就打包到跟目录下
+    path: open ? config.build.assetsRoot + "/" + open : config.build.assetsRoot,
     filename: utils.assetsPath("js/[name].[chunkhash].js"),
     chunkFilename: utils.assetsPath("js/[id].[chunkhash].js"),
     publicPath: resourceUrl

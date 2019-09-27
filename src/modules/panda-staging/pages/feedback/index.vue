@@ -77,46 +77,57 @@ export default {
     },
     // 提交
     submit() {
-      this.sinaAds.click(this.adsInfo.feedback.index.clickSubmit);
+      // 判断是否登录
+      this.$AppBridge.getUserInfo({}, res => {
+        if (res && res.data && res.data.token) {
 
-      // 校验
-      if (!this.checkStr(this.str)) return false;
-      if (!this.checkLink(this.link)) return false;
+          this.sinaAds.click(this.adsInfo.feedback.index.clickSubmit);
 
-      // loading开始
-      Indicator.open();
+          // 校验
+          if (!this.checkStr(this.str)) return false;
+          if (!this.checkLink(this.link)) return false;
 
-      // 请求
-      Api.user.help
-        .feedback({
-          suggestcontent: this.str,
-          contactway: this.link,
-          helptypeid: this.$route.params.helptypeid || undefined,
-          helpid: this.$route.params.helpid || undefined
-        })
-        .then(res => {
-          if (!helper.isSuccess(res)) return false;
+          // loading开始
+          Indicator.open();
 
-          Toast("感谢您的反馈！我们会尽快进行处理~");
+          // 请求
+          Api.user.help.feedback({
+            suggestcontent: this.str,
+            contactway: this.link,
+            helptypeid: this.$route.params.helptypeid || undefined,
+            helpid: this.$route.params.helpid || undefined
+          })
+            .then(res => {
+              if (!helper.isSuccess(res)) return false;
 
-          if (this.$route.params.helptypeid && this.$route.params.helpid) {
-            this.$AppBridge.notify({
-              data: JSON.stringify({ type: "success" }),
-              tag: "noUse"
-            });
-          }
-          // 延时调用伪协议关闭
-          setTimeout(() => {
-            if (this.$AppBridge.isApp) {
-              this.$AppBridge.activityView({
-                type: "close"
-              });
-            } else {
-              window.history.back();
-            }
-          }, 1500);
-        })
-        .finally(Indicator.close);
+              Toast("感谢您的反馈！我们会尽快进行处理~");
+
+              if (this.$route.params.helptypeid && this.$route.params.helpid) {
+                this.$AppBridge.notify({
+                  data: JSON.stringify({ type: "success" }),
+                  tag: "noUse"
+                });
+              }
+              // 延时调用伪协议关闭
+              setTimeout(() => {
+                if (this.$AppBridge.isApp) {
+                  this.$AppBridge.activityView({
+                    type: "close"
+                  });
+                } else {
+                  window.history.back();
+                }
+              }, 1500);
+            })
+            .finally(Indicator.close);
+        } else {
+          this.$AppBridge.goNative({
+            pkg: "login",
+            url: process.env.staticPath + "/panda-staging/#/feedback",
+          });
+        }
+      });
+
     },
 
     // 校验输入的意见反馈
@@ -161,10 +172,21 @@ export default {
     }
   },
   created() {
-    this.getOnlineService();
     this.$root.setWebAttribute({
       title: "意见反馈",
       isFull: false
+    });
+
+    // 判断是否登录
+    this.$AppBridge.getUserInfo({}, res => {
+      if (res && res.data && res.data.token) {
+        this.getOnlineService();
+      } else {
+        this.$AppBridge.goNative({
+          pkg: "login",
+          url: process.env.staticPath + "/panda-staging/#/feedback",
+        });
+      }
     });
   },
   mounted() {

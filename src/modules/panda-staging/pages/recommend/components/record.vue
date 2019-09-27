@@ -19,6 +19,7 @@
           <p class="half-title">已获额度(元)</p>
           <p class="half-sub-title">{{countMoney}}</p>
         </div>-->
+        <redBagBox :res="resdata.welfareInfo" style="background: #fff;box-shadow: 0 2px 16px 0 rgba(0, 0, 0, 0.06);"></redBagBox>
         <div class="list-title2">借款提现</div>
         <div class="list-content">
           <div class="list" v-for="(item, i) in data" :key="i">
@@ -58,10 +59,11 @@
                 </mt-button>
               </div>
             </div>
-            <div  class="c-welfare-info" v-if="item.isShowWelfareInfo">
+            <div class="c-welfare-info" v-if="item.isShowWelfareInfo">
               <img :src="item.icon">
               <span v-html="item.productlistdesc"></span>
             </div>
+            <redCashBack :res="resdata.welfareInfo" :item="resdata.welfareInfo.listRelData&&resdata.welfareInfo.listRelData.find(e=>(e.productid == item.id))"></redCashBack>
           </div>
         </div>
       </div>
@@ -75,6 +77,8 @@ import qs from "qs";
 import api from "@/services/api";
 import helper from "@/utils/helper";
 import { Indicator } from "@/utils/helper";
+import redBagBox from "@/components/business/redEnvelopeCell.vue";
+import redCashBack from "@/components/business/redEnvelopeBottom.vue";
 
 export default {
   data() {
@@ -104,13 +108,16 @@ export default {
     }
   },
   components: {
-    animationItem
+    animationItem,
+    redBagBox,
+    redCashBack,
   },
 
   created() {},
   methods: {
     getLabel(value, type) {
-      return value.filter(item => item.type == type)[0].content;
+      let content = value.filter(item => item.type == type)[0];
+      return content ? content.content : "";
     },
     getClass(value, type) {
       let remark = value.filter(item => item.type == type)[0].remark;
@@ -206,7 +213,7 @@ export default {
     .c-col-20 {
       img {
         width: 87px;
-          margin-right: -10px;
+        margin-right: -10px;
       }
     }
   }
@@ -395,27 +402,30 @@ export default {
     margin-top: 3px;
     white-space: nowrap;
   }
-  .handle-button {
-    margin-top: 16px;
-    width: 86px;
-    height: 32px;
-    font-size: 14px;
-    position: relative;
-    overflow: hidden;
 
-    &.red {
-      background-image: linear-gradient(90deg, #fe5b2b 0%, #fc892a 97%);
-      box-shadow: 0 2px 11px 0 rgba(253, 133, 42, 0.19);
-      border-radius: 4px;
-      color: #fff;
-      border: none;
-    }
-    &.blue {
-      color: $base-color;
-      background: #fff;
-      border: 1px solid $base-color;
-      border-radius: 4px;
-    }
+}
+.handle-button {
+  margin-top: 16px;
+  width: 86px;
+  height: 32px;
+  font-size: 14px;
+  position: relative;
+  overflow: hidden;
+  /deep/ &::after{
+    display: none;
+  }
+  /deep/ &.red {
+    background: linear-gradient(90deg, #fe5b2b 0%, #fc892a);
+    box-shadow: 0 2px 11px 0 rgba(253, 133, 42, 0.19);
+    border-radius: 4px;
+    color: #fff;
+    border: none;
+  }
+  /deep/ &.blue {
+    color: #4586ee;
+    background: #fff;
+    border: 1px solid #4586ee;
+    border-radius: 4px;
   }
 }
 </style>

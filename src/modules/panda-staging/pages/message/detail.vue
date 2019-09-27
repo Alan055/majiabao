@@ -6,8 +6,7 @@
 
 			<div class="message-item">
 				<p class="title">{{item.msgtitle}}</p>
-				<p class="date">{{item.createtime | localTime}}</p>
-				<p class="line"></p>
+				<p class="date">{{item.msgtype==0?"活动":'系统'}}消息 | {{item.createtime.substring(0,10)}}</p>
 				<p class="img-wrap" v-if="item.msgimgurl">
 					<img :src="item.msgimgurl" alt="">
 				</p>
@@ -103,12 +102,14 @@
 	}
 
 	.title {
-		font-size: $fontL;
+		font-size: 18px;
+        font-weight: bold;
 	}
 
 	.date {
-		font-size: $fontS;
-		color: $gray;
+        margin: 10px 0 20px;
+		font-size: 12px;
+		color: #999;
 	}
 
 	.line {

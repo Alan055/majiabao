@@ -8,9 +8,10 @@ import adsInfo from './statisticsInfo';
 import stat from '@/statistic/home'
 import { Swipe, SwipeItem } from 'vant';
 import 'vant/lib/index.css';
-
+import AppBridge from "@/services/AppBridge.js";
 Vue.prototype.stat = stat;
 Vue.prototype.adsInfo = adsInfo;
+Vue.prototype.$AppBridge = AppBridge;
 
 Vue.config.productionTip = false;
 

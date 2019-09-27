@@ -5,12 +5,6 @@
         <span class="blue"></span>
       </mt-cell>
     </div>
-    
-    <div class="cell-list">
-      <mt-cell title="用户协议" @click.native="go(userLink)" is-link >
-        <span class="blue"></span>
-      </mt-cell>
-    </div>
 
     <div class="cell-list">
       <mt-cell title="去好评" @click.native="goGood" is-link >
@@ -18,11 +12,8 @@
       </mt-cell>
     </div>
 
-    <div class="cell-list" v-if="appVersion">
-        <mt-cell title="当前版本">
-            v{{appVersion}}
-        </mt-cell>
-    </div>
+    <aboutCell class="doubleWei" :showVersion="true" :showPrivacy="false"></aboutCell>
+
   </div>
 </template>
 
@@ -30,6 +21,7 @@
 import util from "@/utils";
 import helper from "@/utils/helper";
 import AppBridge from "@/services/AppBridge.js";
+import aboutCell from "@/components/common/aboutCell.vue";
 
 export default {
   data() {
@@ -44,6 +36,7 @@ export default {
     };
   },
   computed: {},
+  components:{aboutCell},
   methods: {
     goGood() {
       this.sinaAds.click(this.adsInfo.about.index.clickGoMarket);
@@ -92,6 +85,9 @@ export default {
 <style lang="scss" scoped>
 .view {
   padding-top: 8px;
+  /deep/ .mint-cell-wrapper{
+    border: none;
+  }
 }
 .copy {
   position: fixed;
