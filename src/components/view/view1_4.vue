@@ -390,7 +390,6 @@
     margin: 0 !important;
     padding: 0px !important;
     -webkit-overflow-scrolling: touch;
-
     .inner {
       margin-top: -6rem;
       width: 100%;

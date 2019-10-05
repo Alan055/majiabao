@@ -28,5 +28,10 @@ export default new Router({
             name: "/scroller",
             component: r => require.ensure([], () => r(require("./pages/view/index")), 'scroller'),
         },
+      {
+        path: "/scroller1",
+        name: "/scroller1",
+        component: r => require.ensure([], () => r(require("./pages/view1/index")), 'scroller'),
+      },
     ]
 });

@@ -1,7 +1,7 @@
 <template lang="html">
-  <scroller :init="init" title="我的积分">
+  <scroller :head="head" :init="init">
 
-    <div class="integral" slot="content">
+    <div class="integral" >
       <div class="integral_top">
         <div class="card">
           <div class="top"><span>当前可使用积分</span><span class="ask" @click="integral_modal=true">?</span></div>
@@ -75,7 +75,7 @@
 
 
 <script>
-	import scroller from "@/components/view/view1_4.vue";
+	import scroller from "@/components/view/view.vue";
 	import cDialog from "@/components/view/dialog";
 
 	export default {
@@ -83,6 +83,15 @@
 		components: {scroller,cDialog},
 		data() {
 			return {
+        // 框架的head
+        head: {
+          left: 'backWhite',
+          title: '我的积分',
+          right: [],
+          border: false,
+          bg: '#000',
+        },
+
 				list: [{},{},{},{},{},{},{},{},{},{},{}],
 
 				integral_modal: false, // 弹框
@@ -108,8 +117,10 @@
 				});
       },
 
-			init() {
+			init(cb) {
 				console.log("123")
+
+        cb && cb()
 			}
 		},
 		created() {
@@ -122,6 +133,9 @@
 <style lang='scss' scoped>
   /deep/ .mint-header{
     border: 0;
+  }
+  /deep/ .header-content{
+    color: #fff !important;
   }
   .integral {
     .integral_top {

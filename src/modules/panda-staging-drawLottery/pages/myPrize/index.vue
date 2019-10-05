@@ -1,5 +1,5 @@
 <template>
-  <PullRefresh class="view" v-model="isLoading" @refresh="init">
+    <scroller :head="head" :init="init">
       <div class="myPrize"  v-if="prizeList.length">
         <div class="item  van-hairline--bottom" v-for="(v,i) in prizeList" :key="i" >
           <div class="left">
@@ -12,41 +12,52 @@
           </div>
         </div>
       </div>
-      <div v-else class="noList" slot="content">
+      <div v-else class="noList">
         <div class="img">
           <img src="./../integral/noList.png" alt="">
         </div>
         <div class="des">暂时没有记录，可去签到获取积分</div>
         <div class="btn">签到赚取积分</div>
       </div>
-  </PullRefresh>
+    </scroller>
 
 </template>
 
 <script>
-	import scroller from "@/components/view/view1_4.vue";
-	import { PullRefresh } from 'vant';
+	import scroller from "@/components/view/view.vue";
 	export default {
-		components: {scroller,PullRefresh},
+		components: {scroller},
 		data() {
 			return {
+        // 框架的head
+        head: {
+          left: 'back',
+          title: '我的奖励',
+          right: [],
+          border: true,
+          bg: '#000',
+          type: 1,
+        },
+
+
 				isLoading: false,
-				prizeList: [1,2,3],
+				prizeList: [1,2,3,3,3],
       }
 		},
 		computed: {},
 		watch: {},
 		methods: {
 
-			init() {
+			init(cb) {
 				setTimeout(() => {
 					console.log("456")
 					this.isLoading = false;
+					cb && cb()
 				}, 500);
 			}
 		},
 		created() {
-			this.$root.setTitle('我的奖励')
+			// this.$root.setTitle('我的奖励')
 		},
 		mounted() {
 		},
@@ -54,18 +65,12 @@
 </script>
 
 <style lang='scss' scoped>
-  /deep/ .dw-scroll{
-
-    height: 100% !important;
-  }
   /deep/ .header {
-    background: #fff !important;
-    .mint-header-title {
-      color: #333;
-    }
+    color: #333;
+    background: #fff;
   }
-  .view{
-    background: #F8F8F8;
+  /deep/ .scroll{
+    background: #f8f8f8;
   }
   .myPrize{
     background: #fff;

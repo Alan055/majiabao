@@ -1,6 +1,6 @@
 <template lang="html">
-  <scroller :init="init" title="">
-    <div class="drawLottery " slot="content">
+  <scroller :head="head" :init="init">
+    <div class="drawLottery " >
       <img src="./prize.png" alt="" class="prize">
       <div class="run" >
         <img src="./horn.png" alt="" class="horn">
@@ -116,7 +116,7 @@
 
 
 <script>
-	import scroller from "@/components/view/view1_4.vue";
+  import scroller from "@/components/view/view.vue";
 	import cDialog from "@/components/view/dialog";
 	import {swiper, swiperSlide} from "vue-awesome-swiper";
 
@@ -125,6 +125,14 @@
 		components: {cDialog, scroller, swiper, swiperSlide},
 		data() {
 			return {
+			  // 框架的head
+        head: {
+          left: 'backWhite',
+          title: '抽奖',
+          right: [],
+          border: false,
+        },
+
 				runIndex: 1, // 抽奖中的转动背景
         runList: [1,2,3,6,9,8,7,4], // 走马灯的顺序  按灯来
         dialogList: ['d','z','b','d','z','f','d','e','d',], // 中奖的序号对应中奖的谈框
@@ -249,7 +257,10 @@
       },
 
 
-			init() {
+			init(callback) {
+
+
+        callback && callback()
 			}
 		},
 		created() {
@@ -442,7 +453,11 @@
  /deep/ .mint-header{
    border: 0;
  }
+ /deep/.scroller .header{
+   color: transparent;
+ }
   .drawLottery {
+    overflow: hidden;
     background: linear-gradient(to bottom, #4b70df, #6a0fb6);
     padding-top: 56px;
     position: relative;

@@ -3,6 +3,7 @@
         <div class="component-dialog"
             :style="`background: rgba(0, 0, 0, ${opacity})`"
             v-if="isShow"
+             @touchmove="touchMove($event)"
         >
             <slot name="content"></slot>
         </div>
@@ -46,7 +47,11 @@ export default {
       }
     }
   },
-  methods: {},
+  methods: {
+    touchMove(e){ // 禁止滑动！
+      e.preventDefault()
+    }
+  },
   created() {
     this.init();
   },
