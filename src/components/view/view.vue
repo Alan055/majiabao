@@ -10,8 +10,8 @@
          v-show="head.type?true:moveDistance==0"
          @touchmove="head.type==1&&touchMoveHeader($event)"
     >
-      <div class="header-left">
-        <c-icon :type="head.left" @click.native="$root.closeWindow()"/>
+      <div class="header-left" >
+        <c-icon :type="head.left" @click.native="$root.closeWindow()" v-if="head.left" />
       </div>
       <div class="header-center"><span>{{head.title}}</span></div>
       <div class="header-right">
@@ -71,7 +71,9 @@
           show: true, // 是否展示页头
           left: 'back', // 左边返回键的icon图标类型
           title: '', // 标题 样式由自组件通过css的deep去修改
-          right: [], // 页头右边的菜单栏 可能是红包、签到、消息、客服等等、这里同样也要加上点击跳转的url 增加一个功能就是判断是否需要登录
+          right: [ // 页头右边的菜单栏 可能是红包、签到、消息、客服等等、这里同样也要加上点击跳转的url 增加一个功能就是判断是否需要登录
+            // {img: '/static/images/close.png', needLogin: true, jumpUrl: 'http://www.baidu.com'},
+          ],
           border: true, // 是否有下边框
           type: 0, // 这个是默认 代表下拉刷新dom在整个页面的最上方  1下拉刷新dom在header下面
         }
