@@ -1,0 +1,30 @@
+.c-aspectratio {
+  position: relative;
+  &::before {
+    content: '';
+    display: block;
+    width: 1px;
+    margin-left: -1px;
+    height: 0;
+  }
+  .c-aspectratio-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+/*
+  usage:
+
+  .w-188-246 {
+    aspect-ratio: '188:128';
+  }
+
+  notice: aspect-ratio独占一块，不可混合其他样式
+
+*/

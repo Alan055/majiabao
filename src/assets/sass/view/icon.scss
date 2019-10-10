@@ -1,0 +1,35 @@
+.icon_a, .icon-16{
+    @include size(24px);
+}
+.icon_b, .icon-20{
+    @include size(20px);
+}
+.icon_c, .icon-16{
+    @include size(16px);
+}
+.icon_d, .icon-36{
+    @include size(36px);
+}
+.icon_e, .icon-40{
+    @include size(40px);
+}
+.icon_f, .icon-60{
+    @include size(60px);
+}
+.icon_g, .icon-12{
+    @include size(12px);
+}
+.icon-24{
+    @include size(24px);
+}
+
+%icon-base {
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.icon_question {
+    @include size(16px);
+    @extend %icon-base;
+    background-image: url('../../images/icon/icon_question.png');
+}

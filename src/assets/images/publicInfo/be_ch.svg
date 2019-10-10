@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>be_ch</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M3.81818182,7.41042897 L11.0688508,0.159759938 C11.2818641,-0.0532533125 11.6272268,-0.0532533125 11.8402401,0.159759938 C12.0532533,0.372773188 12.0532533,0.718135903 11.8402401,0.931149153 L4.20387643,8.56751279 C3.99086318,8.78052604 3.64550046,8.78052604 3.43248721,8.56751279 C3.21947396,8.35449954 3.21947396,8.00913682 3.43248721,7.79612357 L3.81818182,7.41042897 L4.20387643,7.79612357 C4.41688968,8.00913682 4.41688968,8.35449954 4.20387643,8.56751279 C3.99086318,8.78052604 3.64550046,8.78052604 3.43248721,8.56751279 L0.159759938,5.29478552 C-0.0532533125,5.08177227 -0.0532533125,4.73640955 0.159759938,4.5233963 C0.372773188,4.31038305 0.718135903,4.31038305 0.931149153,4.5233963 L3.81818182,7.41042897 Z" id="path-1"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标编码" transform="translate(-391.000000, -2361.000000)">
+            <g id="Repeat-Group" transform="translate(-1.000000, 537.000000)"></g>
+            <g id="Repeat-Group-Copy" transform="translate(1750.000000, 2288.000000) rotate(90.000000) translate(-1750.000000, -2288.000000) translate(-1.000000, 537.000000)"></g>
+            <g id="icon/16*16/列表完成" transform="translate(391.000000, 2361.000000)">
+                <g id="外围组件/颜色/蓝色提示类" transform="translate(2.000000, 4.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#659FFC" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g mask="url(#mask-2)" fill="#659FFC" id="Rectangle-15">
+                        <g transform="translate(-173.000000, -321.000000)">
+                            <rect x="0" y="0" width="375" height="667"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

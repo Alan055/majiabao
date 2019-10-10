@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>aa_fr</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <circle id="path-1" cx="30" cy="30" r="30"></circle>
+        <linearGradient x1="100%" y1="55.4511726%" x2="9.23388777%" y2="55.4511726%" id="linearGradient-3">
+            <stop stop-color="#625869" offset="0%"></stop>
+            <stop stop-color="#514353" offset="100%"></stop>
+        </linearGradient>
+        <path d="M14.0590053,55.4189342 C14.7604837,49.0215266 21.629624,44 30,44 C38.370376,44 45.2395163,49.0215266 45.9409947,55.4189342 C41.3226146,58.3213684 35.85734,60 30,60 C24.14266,60 18.6773854,58.3213684 14.0590053,55.4189342 Z" id="path-4"></path>
+        <linearGradient x1="-17.1311071%" y1="82.342011%" x2="100%" y2="42.4097416%" id="linearGradient-6">
+            <stop stop-color="#37313B" offset="0%"></stop>
+            <stop stop-color="#6B596E" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标编码" transform="translate(-75.000000, -973.000000)">
+            <g id="Repeat-Group" transform="translate(-1.000000, 537.000000)"></g>
+            <g id="Repeat-Group-Copy" transform="translate(1750.000000, 2288.000000) rotate(90.000000) translate(-1750.000000, -2288.000000) translate(-1.000000, 537.000000)"></g>
+            <g id="icon/60*60/头像" transform="translate(75.000000, 973.000000)">
+                <g id="Fill-1">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#FFFFFF" xlink:href="#path-1"></use>
+                    <mask id="mask-5" fill="white">
+                        <use xlink:href="#path-4"></use>
+                    </mask>
+                    <use id="Combined-Shape" fill="url(#linearGradient-3)" xlink:href="#path-4"></use>
+                    <path d="M18,48 C28,54 37,54 45,48 C53,42 50.6666667,39.3333333 38,40 C21.3333333,41.3333333 13,42 13,42 C13,42 14.6666667,44 18,48 Z" id="Path-2" fill-opacity="0.3" fill="#2B0005" style="mix-blend-mode: multiply;" mask="url(#mask-5)"></path>
+                    <g id="Group-3" transform="translate(10.000000, 13.000000)">
+                        <path d="M37.2996923,11.6429007 C37.6907692,10.9083466 37.9166154,9.42272484 37.3584615,8.72884343 C36.5276923,7.69581946 34.7935385,7.93373913 34.7935385,7.93373913 C35.8190769,6.1722773 35.2473846,4.39644243 32.8304615,4.32274238 C31.4895385,4.28176393 30.1993846,5.0955226 30.1993846,5.0955226 C30.7215385,3.89950225 31.9461538,1.50715574 29.4341538,0.283918356 C26.1633846,-1.30934833 12.8310769,4.32274238 12.8310769,4.32274238 C12.8310769,4.32274238 12.8458462,4.32824695 12.868,4.33589218 C5.34492308,6.76187772 0,12.9089514 0,20.1132079 C0,29.4394756 8.95384615,37 20,37 C31.0464615,37 40,29.4397814 40,20.1132079 C40,17.0251452 39.0138462,14.133412 37.2996923,11.6429007" id="Fill-1" fill="url(#linearGradient-6)"></path>
+                        <ellipse id="Oval" fill="#FFFFFF" cx="19.5" cy="20.5" rx="15.5" ry="12.5"></ellipse>
+                        <ellipse id="Oval-2" fill="#F8B0A0" cx="12" cy="25" rx="3" ry="1"></ellipse>
+                        <ellipse id="Oval-2-Copy" fill="#F8B0A0" cx="27" cy="25" rx="3" ry="1"></ellipse>
+                        <rect id="Rectangle-5" fill="#4A4A4A" x="10" y="16" width="4" height="6" rx="2"></rect>
+                        <rect id="Rectangle-5-Copy" fill="#4A4A4A" x="25" y="16" width="4" height="6" rx="2"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

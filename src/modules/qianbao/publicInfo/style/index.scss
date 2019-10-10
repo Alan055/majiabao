@@ -1,0 +1,45 @@
+.view-public-info-step,
+.view-public-info-view{
+  .content-wrap{
+    position: relative;
+    padding-bottom: 50px;
+    min-height: 100%;
+  }
+  .bottom-info{
+    font-size: 12px;
+    color: #666666;
+    padding: 16px;
+    text-align: center;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    .c-icon{
+      @include size(16PX);
+    }
+  }
+
+}
+
+.view-public-info-view{
+  .mint-tab-item{
+    font-size: $fontM;
+    &.is-selected::after{
+      left: 0;
+      right: 0;
+    }
+  }
+  .mint-cell-wrapper{
+    border: none;
+  }
+  .mint-cell-value{
+    color: $light;
+  }
+}
+button.btn-primary {
+  border: 0 solid #E6E6E6;
+  background: #10CDB9;
+    border-radius: 100px;
+}

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="64px" height="43px" viewBox="0 0 64 43" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>new</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-40.5%" y="-65.0%" width="181.0%" height="270.0%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="2" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.905882353   0 0 0 0 0.141176471   0 0 0 0 0.152941176  0 0 0 0.302932518 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <linearGradient x1="0%" y1="50%" x2="100%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#E72427" offset="0%"></stop>
+            <stop stop-color="#FE4C35" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-3" x="0" y="0" width="42" height="20" rx="10"></rect>
+        <filter x="-38.1%" y="-70.0%" width="176.2%" height="260.0%" filterUnits="objectBoundingBox" id="filter-4">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.925490196   0 0 0 0 0.17254902   0 0 0 0 0.164705882  0 0 0 0.29967731 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="图标编码" transform="translate(-1.000000, -1196.000000)">
+            <g id="new" filter="url(#filter-1)" transform="translate(12.000000, 1204.000000)">
+                <g id="Rectangle">
+                    <use fill="black" fill-opacity="1" filter="url(#filter-4)" xlink:href="#path-3"></use>
+                    <use fill="url(#linearGradient-2)" fill-rule="evenodd" xlink:href="#path-3"></use>
+                </g>
+                <text id="New" font-family="DINAlternate-Bold, DIN Alternate" font-size="11" font-weight="bold" letter-spacing="0.0620659702" fill="#FFFFFF">
+                    <tspan x="10.422526" y="14">New</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

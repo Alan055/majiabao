@@ -1,0 +1,37 @@
+@charset "utf-8";
+@import "./variables";
+.btn-primary {
+    border: 0px !important;
+    background: #0DB983 !important;
+    box-shadow: none !important;
+}
+
+.mint-cell-text {
+    font-family: PingFang-SC-Regular;
+    font-size: 16px !important;
+    color: #333333 !important;
+    letter-spacing: 0.12px;
+}
+
+.no-data-img {
+    width: 150px !important;
+    height: 100px !important;
+}
+
+//vant重置
+.van-hairline--top-bottom:after {
+    border-width: 0 !important;
+}
+
+.van-tab--active {
+    color: #4586ee !important;
+    font-weight: normal;
+}
+
+.van-tabs__line {
+    background: #4E67FF;
+    border-radius: 2px;
+    border-radius: 2px;
+    width: 22px !important;
+    left: 20px; //这个left可能不准，需要在使用到的组件里再重置
+}
